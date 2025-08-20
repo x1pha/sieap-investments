@@ -1,7 +1,10 @@
 import { Github, Twitter } from "lucide-react";
 import { Button } from "./ui/button";
 
+console.log("Footer component file loaded successfully");
+
 const Footer = () => {
+  console.log("Footer component initialized");
   return (
     <footer className="w-full py-12 mt-20">
       <div className="container px-4">
@@ -82,4 +85,5 @@ const Footer = () => {
   );
 };
 
+console.log("Footer component defined, about to export");
 export default Footer;
