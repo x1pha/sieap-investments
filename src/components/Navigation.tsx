@@ -76,21 +76,21 @@ const Navigation = ({ userType = "business", onTypeChange }: NavigationProps) =>
                 <TabsList className="grid grid-cols-3 h-10 bg-secondary/50 backdrop-blur-sm">
                   <TabsTrigger 
                     value="business" 
-                    className="flex items-center gap-1 text-xs font-medium h-8 px-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                    className="flex items-center gap-1 text-xs font-medium h-8 px-3 data-[state=active]:bg-primary data-[state=active]:text-black"
                   >
                     <Building2 className="w-3 h-3" />
                     Business
                   </TabsTrigger>
                   <TabsTrigger 
                     value="investor" 
-                    className="flex items-center gap-1 text-xs font-medium h-8 px-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                    className="flex items-center gap-1 text-xs font-medium h-8 px-3 data-[state=active]:bg-primary data-[state=active]:text-black"
                   >
                     <Users className="w-3 h-3" />
                     Investor
                   </TabsTrigger>
                   <TabsTrigger 
                     value="incubator" 
-                    className="flex items-center gap-1 text-xs font-medium h-8 px-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                    className="flex items-center gap-1 text-xs font-medium h-8 px-3 data-[state=active]:bg-primary data-[state=active]:text-black"
                   >
                     <Rocket className="w-3 h-3" />
                     Incubator
@@ -126,21 +126,21 @@ const Navigation = ({ userType = "business", onTypeChange }: NavigationProps) =>
                       <TabsList className="grid grid-cols-3 w-full h-12 bg-secondary/50 backdrop-blur-sm">
                         <TabsTrigger 
                           value="business" 
-                          className="flex items-center gap-2 text-sm font-medium h-10 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                          className="flex items-center gap-2 text-sm font-medium h-10 data-[state=active]:bg-primary data-[state=active]:text-black"
                         >
                           <Building2 className="w-4 h-4" />
                           Business
                         </TabsTrigger>
                         <TabsTrigger 
                           value="investor" 
-                          className="flex items-center gap-2 text-sm font-medium h-10 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                          className="flex items-center gap-2 text-sm font-medium h-10 data-[state=active]:bg-primary data-[state=active]:text-black"
                         >
                           <Users className="w-4 h-4" />
                           Investor
                         </TabsTrigger>
                         <TabsTrigger 
                           value="incubator" 
-                          className="flex items-center gap-2 text-sm font-medium h-10 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                          className="flex items-center gap-2 text-sm font-medium h-10 data-[state=active]:bg-primary data-[state=active]:text-black"
                         >
                           <Rocket className="w-4 h-4" />
                           Incubator
