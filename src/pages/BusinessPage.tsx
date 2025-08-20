@@ -62,7 +62,7 @@ export default function BusinessPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="button-gradient text-white">
-                Start Your Journey
+                Register Your Startup
               </Button>
               <Button variant="outline" size="lg">
                 Book a Consultation

@@ -14,11 +14,11 @@ const investorTiers = [
       "Deal flow access to 500+ startups",
       "Basic analytics and communication tools",
       "Simple investment tracking",
-      "MarketView dashboard access",
-      "Email support",
-      "Monthly market reports"
+      "MarketView dashboard access"
     ],
-    limitations: ["20 startup connections/month"],
+    limitations: [
+      "20 startup connections/month"
+    ],
     isPopular: false
   },
   {
@@ -26,14 +26,11 @@ const investorTiers = [
     price: "$499",
     description: "Premium solution with professional services",
     features: [
-      "Everything in Solo Investor PLUS:",
+      "Everything in Solo PLUS:",
       "CA Financial Services: 4 hours/month tax advisory",
       "Compliance Support: Legal consultation & due diligence",
       "Portfolio Management: Advanced analytics & risk assessment",
-      "Unlimited startup connections",
-      "API access for custom integrations",
-      "Dedicated investment advisor",
-      "Priority customer support"
+      "Premium Features: Unlimited connections, API access, dedicated advisor"
     ],
     limitations: [],
     isPopular: true
@@ -84,7 +81,7 @@ const InvestorTier = ({ name, price, description, features, limitations, isPopul
           className={`w-full mt-8 ${isPopular ? 'button-gradient text-white' : 'bg-secondary hover:bg-secondary/80'}`}
           size="lg"
         >
-          Start Investing
+          Get Started
         </Button>
       </CardContent>
     </Card>

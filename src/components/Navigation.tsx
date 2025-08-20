@@ -1,8 +1,14 @@
 import { useState, useEffect } from "react";
-import { Command, Menu } from "lucide-react";
+import { Command, Menu, Building2, Users, Rocket } from "lucide-react";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
-const Navigation = () => {
+import { Tabs, TabsList, TabsTrigger } from "./ui/tabs";
+interface NavigationProps {
+  userType?: string;
+  onTypeChange?: (type: string) => void;
+}
+
+const Navigation = ({ userType = "business", onTypeChange }: NavigationProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   useEffect(() => {
@@ -60,12 +66,38 @@ const Navigation = () => {
         <nav className="flex items-center justify-between h-full">
           <div className="flex items-center gap-2">
             <Command className="w-5 h-5 text-primary" />
-            <span className="font-bold text-base">SIEAP Investments
-          </span>
+            <span className="font-bold text-base">SIEAP Ecosystem</span>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-4">
+            {onTypeChange && (
+              <Tabs value={userType} onValueChange={onTypeChange} className="w-auto">
+                <TabsList className="grid grid-cols-3 h-10 bg-secondary/50 backdrop-blur-sm">
+                  <TabsTrigger 
+                    value="business" 
+                    className="flex items-center gap-1 text-xs font-medium h-8 px-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                  >
+                    <Building2 className="w-3 h-3" />
+                    Business
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="investor" 
+                    className="flex items-center gap-1 text-xs font-medium h-8 px-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                  >
+                    <Users className="w-3 h-3" />
+                    Investor
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="incubator" 
+                    className="flex items-center gap-1 text-xs font-medium h-8 px-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                  >
+                    <Rocket className="w-3 h-3" />
+                    Incubator
+                  </TabsTrigger>
+                </TabsList>
+              </Tabs>
+            )}
             {navItems.map(item => <a key={item.name} href={item.href} onClick={e => {
             e.preventDefault();
             if (item.onClick) {
@@ -75,7 +107,7 @@ const Navigation = () => {
                 {item.name}
               </a>)}
             <Button onClick={() => scrollToSection('cta')} size="sm" className="button-gradient">
-              Start Trading
+              Get Started
             </Button>
           </div>
 
@@ -89,6 +121,33 @@ const Navigation = () => {
               </SheetTrigger>
               <SheetContent className="bg-[#1B1B1B]">
                 <div className="flex flex-col gap-4 mt-8">
+                  {onTypeChange && (
+                    <Tabs value={userType} onValueChange={onTypeChange} className="w-full">
+                      <TabsList className="grid grid-cols-3 w-full h-12 bg-secondary/50 backdrop-blur-sm">
+                        <TabsTrigger 
+                          value="business" 
+                          className="flex items-center gap-2 text-sm font-medium h-10 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                        >
+                          <Building2 className="w-4 h-4" />
+                          Business
+                        </TabsTrigger>
+                        <TabsTrigger 
+                          value="investor" 
+                          className="flex items-center gap-2 text-sm font-medium h-10 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                        >
+                          <Users className="w-4 h-4" />
+                          Investor
+                        </TabsTrigger>
+                        <TabsTrigger 
+                          value="incubator" 
+                          className="flex items-center gap-2 text-sm font-medium h-10 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                        >
+                          <Rocket className="w-4 h-4" />
+                          Incubator
+                        </TabsTrigger>
+                      </TabsList>
+                    </Tabs>
+                  )}
                   {navItems.map(item => <a key={item.name} href={item.href} className="text-lg text-muted-foreground hover:text-foreground transition-colors" onClick={e => {
                   e.preventDefault();
                   setIsMobileMenuOpen(false);
@@ -102,7 +161,7 @@ const Navigation = () => {
                   setIsMobileMenuOpen(false);
                   scrollToSection('cta');
                 }} className="button-gradient mt-4">
-                    Start Trading
+                    Get Started
                   </Button>
                 </div>
               </SheetContent>

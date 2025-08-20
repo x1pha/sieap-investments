@@ -1,19 +1,16 @@
 import { Github, Twitter } from "lucide-react";
 import { Button } from "./ui/button";
 
-console.log("Footer component file loaded successfully");
-
 const Footer = () => {
-  console.log("Footer component initialized");
   return (
     <footer className="w-full py-12 mt-20">
       <div className="container px-4">
         <div className="glass glass-hover rounded-xl p-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="space-y-4">
-              <h3 className="font-medium text-lg">CryptoTrade</h3>
+              <h3 className="font-medium text-lg">SIEAP Ecosystem</h3>
               <p className="text-sm text-muted-foreground">
-                Empowering traders with advanced crypto trading solutions.
+                Empowering startups, investors, and incubators with comprehensive ecosystem solutions.
               </p>
               <div className="flex space-x-4">
                 <Button variant="ghost" size="icon">
@@ -26,16 +23,16 @@ const Footer = () => {
             </div>
 
             <div className="space-y-4">
-              <h4 className="font-medium">Trading</h4>
+              <h4 className="font-medium">Services</h4>
               <ul className="space-y-2">
                 <li>
                   <a href="#features" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    Markets
+                    Startup Registration
                   </a>
                 </li>
                 <li>
                   <a href="#pricing" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    Trading Fees
+                    Pricing Plans
                   </a>
                 </li>
               </ul>
@@ -46,12 +43,12 @@ const Footer = () => {
               <ul className="space-y-2">
                 <li>
                   <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    Trading Guide
+                    Mentor Network
                   </a>
                 </li>
                 <li>
                   <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    Market Analysis
+                    Startup Guide
                   </a>
                 </li>
               </ul>
@@ -85,5 +82,4 @@ const Footer = () => {
   );
 };
 
-console.log("Footer component defined, about to export");
 export default Footer;

@@ -1,25 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-
-console.log("MainIndex: Starting imports...");
-
 import Navigation from "@/components/Navigation";
-console.log("MainIndex: Navigation imported successfully");
-
-import { UserTypeToggle } from "@/components/UserTypeToggle";
-console.log("MainIndex: UserTypeToggle imported successfully");
-
 import Footer from "@/components/Footer";
-console.log("MainIndex: Footer imported successfully");
-
 import BusinessPage from "./BusinessPage";
-console.log("MainIndex: BusinessPage imported successfully");
-
 import InvestorPage from "./InvestorPage";
-console.log("MainIndex: InvestorPage imported successfully");
-
 import IncubatorPage from "./IncubatorPage";
-console.log("MainIndex: All imports completed successfully");
 
 export default function MainIndex() {
   const [userType, setUserType] = useState("business");
@@ -53,8 +38,7 @@ export default function MainIndex() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navigation />
-      <UserTypeToggle onTypeChange={handleTypeChange} currentType={userType} />
+      <Navigation userType={userType} onTypeChange={handleTypeChange} />
       {renderContent()}
       <Footer />
     </div>

@@ -9,45 +9,41 @@ const businessTiers = [
   {
     name: "Starter",
     price: "$99",
-    description: "Perfect for early-stage startups",
+    description: "Perfect for entrepreneurs just getting started",
     features: [
-      "Basic mentoring sessions (2 hours/month)",
+      "Basic startup profile creation and investor database access",
+      "2 hours monthly mentoring sessions",
       "Pitch deck review and feedback",
-      "Investor introduction (up to 3/month)",
-      "Access to resource library",
-      "Community forum access",
-      "Email support"
+      "Basic analytics dashboard", 
+      "Standard customer support"
     ],
     isPopular: false
   },
   {
     name: "Growth",
-    price: "$299", 
-    description: "Ideal for scaling startups",
+    price: "$299",
+    description: "Ideal for growing startups seeking active guidance",
     features: [
-      "Enhanced mentoring (6 hours/month)",
-      "Legal and CA advisory services",
-      "Strategic business planning",
-      "Investor pitch preparation",
-      "Market research support",
-      "Priority support",
-      "Networking events access"
+      "All Starter features",
+      "4 hours monthly advisory sessions (legal, financial, strategic)",
+      "Priority investor matching and introductions",
+      "Advanced analytics and market insights",
+      "Video conferencing and collaboration tools",
+      "Dedicated account manager"
     ],
     isPopular: true
   },
   {
     name: "Scale",
     price: "$599",
-    description: "Complete solution for growing businesses",
+    description: "Full-service solution for scaling startups",
     features: [
-      "Dedicated advisor assigned",
-      "Unlimited mentoring sessions",
-      "Priority investor matching",
-      "Legal document templates",
-      "Financial modeling support",
-      "Demo day presentation opportunity",
-      "White-glove onboarding",
-      "Custom partnership opportunities"
+      "All Growth features",
+      "Unlimited advisory sessions with dedicated advisor",
+      "Premium investor network access",
+      "Custom due diligence support",
+      "White-label platform options",
+      "Priority customer support and SLA"
     ],
     isPopular: false
   }
@@ -82,7 +78,7 @@ const BusinessTier = ({ name, price, description, features, isPopular }: typeof 
           className={`w-full mt-8 ${isPopular ? 'button-gradient text-white' : 'bg-secondary hover:bg-secondary/80'}`}
           size="lg"
         >
-          Start Trading
+          Get Started
         </Button>
       </CardContent>
     </Card>
@@ -100,7 +96,7 @@ export const BusinessPricingSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Choose Your <span className="text-gradient">Growth Plan</span>
+            🚀 Startup <span className="text-gradient">Packages</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Select the perfect plan to accelerate your startup journey
