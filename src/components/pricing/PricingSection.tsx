@@ -110,47 +110,64 @@ export const PricingSection = () => {
             transition={{ delay: 0.2, duration: 0.5 }}
             className="flex justify-center mb-8"
           >
-            <Tabs value={userType} onValueChange={(value) => setLocalUserType(value as UserType)} className="w-auto">
-              <TabsList className="grid grid-cols-3 h-12 bg-secondary/50 backdrop-blur-sm">
-                <TabsTrigger 
-                  value="business" 
-                  className="flex items-center gap-2 text-sm font-medium h-10 px-4 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
-                >
-                  <Building2 className="w-4 h-4" />
-                  Business
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="investor" 
-                  className="flex items-center gap-2 text-sm font-medium h-10 px-4 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
-                >
-                  <Users className="w-4 h-4" />
-                  Investor
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="incubator" 
-                  className="flex items-center gap-2 text-sm font-medium h-10 px-4 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
-                >
-                  <Rocket className="w-4 h-4" />
-                  Incubator
-                </TabsTrigger>
-              </TabsList>
-            </Tabs>
+            <div className="relative">
+              <Tabs value={userType} onValueChange={(value) => setLocalUserType(value as UserType)} className="w-auto">
+                <TabsList className="grid grid-cols-3 h-14 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-1 shadow-2xl">
+                  <TabsTrigger 
+                    value="business" 
+                    className="flex items-center gap-2 text-sm font-medium h-12 px-6 rounded-xl transition-all duration-300 ease-out data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-primary/80 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-primary/25 data-[state=active]:scale-105 hover:bg-white/5 hover:scale-102 text-gray-300 hover:text-white"
+                  >
+                    <Building2 className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
+                    <span className="font-semibold">Business</span>
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="investor" 
+                    className="flex items-center gap-2 text-sm font-medium h-12 px-6 rounded-xl transition-all duration-300 ease-out data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-primary/80 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-primary/25 data-[state=active]:scale-105 hover:bg-white/5 hover:scale-102 text-gray-300 hover:text-white"
+                  >
+                    <Users className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
+                    <span className="font-semibold">Investor</span>
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="incubator" 
+                    className="flex items-center gap-2 text-sm font-medium h-12 px-6 rounded-xl transition-all duration-300 ease-out data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-primary/80 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-primary/25 data-[state=active]:scale-105 hover:bg-white/5 hover:scale-102 text-gray-300 hover:text-white"
+                  >
+                    <Rocket className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
+                    <span className="font-semibold">Incubator</span>
+                  </TabsTrigger>
+                </TabsList>
+              </Tabs>
+              
+              {/* Subtle glow effect */}
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/20 via-transparent to-primary/20 rounded-2xl blur opacity-30 animate-pulse"></div>
+            </div>
           </motion.div>
         )}
       </div>
 
       {context ? (
-        <>
+        <motion.div
+          key={userType}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+        >
           {userType === 'business' && <BusinessPricingSection />}
           {userType === 'investor' && <InvestorPricingSection />}
           {userType === 'incubator' && <IncubatorPricingSection />}
-        </>
+        </motion.div>
       ) : (
-        <>
+        <motion.div
+          key={userType}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+        >
           {userType === 'business' && <BusinessPricingSection />}
           {userType === 'investor' && <InvestorPricingSection />}
           {userType === 'incubator' && <IncubatorPricingSection />}
-        </>
+        </motion.div>
       )}
     </section>
   );
