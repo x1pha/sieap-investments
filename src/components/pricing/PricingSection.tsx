@@ -115,23 +115,23 @@ export const PricingSection = () => {
                 <TabsList className="grid grid-cols-3 h-14 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-1 shadow-2xl">
                   <TabsTrigger 
                     value="business" 
-                    className="flex items-center gap-2 text-sm font-medium h-12 px-6 rounded-xl transition-all duration-300 ease-out data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-primary/80 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-primary/25 data-[state=active]:scale-105 hover:bg-white/5 hover:scale-102 text-gray-300 hover:text-white"
+                    className="flex items-center gap-2 text-sm font-medium h-12 px-6 rounded-xl transition-all duration-300 ease-out data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-primary/80 data-[state=active]:text-black data-[state=active]:shadow-lg data-[state=active]:shadow-primary/25 data-[state=active]:scale-105 hover:bg-white/5 hover:scale-102 text-gray-300 hover:text-white cursor-pointer"
                   >
-                    <Building2 className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
+                    <Building2 className="w-4 h-4 transition-transform duration-300" />
                     <span className="font-semibold">Business</span>
                   </TabsTrigger>
                   <TabsTrigger 
                     value="investor" 
-                    className="flex items-center gap-2 text-sm font-medium h-12 px-6 rounded-xl transition-all duration-300 ease-out data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-primary/80 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-primary/25 data-[state=active]:scale-105 hover:bg-white/5 hover:scale-102 text-gray-300 hover:text-white"
+                    className="flex items-center gap-2 text-sm font-medium h-12 px-6 rounded-xl transition-all duration-300 ease-out data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-primary/80 data-[state=active]:text-black data-[state=active]:shadow-lg data-[state=active]:shadow-primary/25 data-[state=active]:scale-105 hover:bg-white/5 hover:scale-102 text-gray-300 hover:text-white cursor-pointer"
                   >
-                    <Users className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
+                    <Users className="w-4 h-4 transition-transform duration-300" />
                     <span className="font-semibold">Investor</span>
                   </TabsTrigger>
                   <TabsTrigger 
                     value="incubator" 
-                    className="flex items-center gap-2 text-sm font-medium h-12 px-6 rounded-xl transition-all duration-300 ease-out data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-primary/80 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-primary/25 data-[state=active]:scale-105 hover:bg-white/5 hover:scale-102 text-gray-300 hover:text-white"
+                    className="flex items-center gap-2 text-sm font-medium h-12 px-6 rounded-xl transition-all duration-300 ease-out data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-primary/80 data-[state=active]:text-black data-[state=active]:shadow-lg data-[state=active]:shadow-primary/25 data-[state=active]:scale-105 hover:bg-white/5 hover:scale-102 text-gray-300 hover:text-white cursor-pointer"
                   >
-                    <Rocket className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
+                    <Rocket className="w-4 h-4 transition-transform duration-300" />
                     <span className="font-semibold">Incubator</span>
                   </TabsTrigger>
                 </TabsList>
