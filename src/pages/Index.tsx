@@ -65,8 +65,8 @@ const Index = () => {
             transition={{ delay: 0.5 }}
             className="flex flex-col sm:flex-row gap-4 items-start"
           >
-            <Button size="lg" className="button-gradient">
-              Start Trading Now
+            <Button size="lg" className="button-gradient" asChild>
+              <a href="/business">Get Started</a>
             </Button>
             <Button size="lg" variant="link" className="text-white">
               View Markets <ArrowRight className="ml-2 w-4 h-4" />
@@ -130,9 +130,11 @@ const Index = () => {
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
             Join thousands of traders who have already discovered the power of our platform.
           </p>
-          <Button size="lg" className="button-gradient">
-            Create Account
-            <ArrowRight className="ml-2 w-4 h-4" />
+          <Button size="lg" className="button-gradient" asChild>
+            <a href="/business">
+              Create Account
+              <ArrowRight className="ml-2 w-4 h-4" />
+            </a>
           </Button>
         </motion.div>
       </section>
