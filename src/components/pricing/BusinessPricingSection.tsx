@@ -87,35 +87,17 @@ const BusinessTier = ({ name, price, description, features, isPopular }: typeof 
 
 export const BusinessPricingSection = () => {
   return (
-    <section className="py-20 px-4 bg-background">
-      <div className="container mx-auto">
+    <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      {businessTiers.map((tier, index) => (
         <motion.div
+          key={tier.name}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.5, delay: index * 0.1 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            🚀 Startup <span className="text-gradient">Packages</span>
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Select the perfect plan to accelerate your startup journey
-          </p>
+          <BusinessTier {...tier} />
         </motion.div>
-
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {businessTiers.map((tier, index) => (
-            <motion.div
-              key={tier.name}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <BusinessTier {...tier} />
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
+      ))}
+    </div>
   );
 };
