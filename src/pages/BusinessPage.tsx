@@ -1,11 +1,14 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, Users, Award, Target, BookOpen, TrendingUp } from "lucide-react";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { CheckCircle, Users, Award, Target, BookOpen, TrendingUp, Building2, Rocket } from "lucide-react";
 import { BusinessPricingSection } from "@/components/pricing/BusinessPricingSection";
 
 export default function BusinessPage() {
+  const [registrationType, setRegistrationType] = useState("business");
   const services = [
     {
       title: "Pitch Review & Refinement",
@@ -60,9 +63,41 @@ export default function BusinessPage() {
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
               Get expert mentoring, investor connections, and comprehensive support to scale your startup from idea to IPO.
             </p>
+            
+            {/* Registration Type Toggle */}
+            <div className="mb-8">
+              <Tabs value={registrationType} onValueChange={setRegistrationType} className="w-full max-w-md mx-auto">
+                <TabsList className="grid grid-cols-3 h-14 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-1 shadow-2xl">
+                  <TabsTrigger 
+                    value="business" 
+                    className="flex items-center gap-2 text-sm font-medium h-12 px-4 rounded-xl transition-all duration-300 ease-out data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-primary/80 data-[state=active]:text-black data-[state=active]:shadow-lg data-[state=active]:shadow-primary/25 data-[state=active]:scale-105 hover:bg-white/5 hover:scale-102 text-gray-300 hover:text-white cursor-pointer"
+                  >
+                    <Building2 className="w-4 h-4" />
+                    <span className="font-semibold">Business</span>
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="investor" 
+                    className="flex items-center gap-2 text-sm font-medium h-12 px-4 rounded-xl transition-all duration-300 ease-out data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-primary/80 data-[state=active]:text-black data-[state=active]:shadow-lg data-[state=active]:shadow-primary/25 data-[state=active]:scale-105 hover:bg-white/5 hover:scale-102 text-gray-300 hover:text-white cursor-pointer"
+                  >
+                    <Users className="w-4 h-4" />
+                    <span className="font-semibold">Investor</span>
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="incubator" 
+                    className="flex items-center gap-2 text-sm font-medium h-12 px-4 rounded-xl transition-all duration-300 ease-out data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-primary/80 data-[state=active]:text-black data-[state=active]:shadow-lg data-[state=active]:shadow-primary/25 data-[state=active]:scale-105 hover:bg-white/5 hover:scale-102 text-gray-300 hover:text-white cursor-pointer"
+                  >
+                    <Rocket className="w-4 h-4" />
+                    <span className="font-semibold">Incubator</span>
+                  </TabsTrigger>
+                </TabsList>
+              </Tabs>
+            </div>
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="button-gradient text-white">
-                Register Your Startup
+                {registrationType === "business" && "Register Your Startup"}
+                {registrationType === "investor" && "Register as Investor"}
+                {registrationType === "incubator" && "Register Your Incubator"}
               </Button>
               <Button variant="outline" size="lg">
                 Book a Consultation
