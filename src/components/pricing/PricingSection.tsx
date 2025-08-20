@@ -2,7 +2,8 @@ import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CardSpotlight } from "./CardSpotlight";
-import { useUserType } from "@/contexts/UserTypeContext";
+import { useContext } from "react";
+import { UserTypeContext, UserTypeContextType } from "@/contexts/UserTypeContext";
 import { BusinessPricingSection } from "./BusinessPricingSection";
 import { InvestorPricingSection } from "./InvestorPricingSection";
 import { IncubatorPricingSection } from "./IncubatorPricingSection";
@@ -42,14 +43,15 @@ const PricingTier = ({
         ))}
       </ul>
       <Button className="button-gradient w-full">
-        Start Trading
+        Get Started
       </Button>
     </div>
   </CardSpotlight>
 );
 
 export const PricingSection = () => {
-  const { userType } = useUserType();
+  const context = useContext(UserTypeContext);
+  const userType = context?.userType || 'business';
 
   const getTitleText = () => {
     switch (userType) {
@@ -99,9 +101,55 @@ export const PricingSection = () => {
         </motion.p>
       </div>
 
-      {userType === 'business' && <BusinessPricingSection />}
-      {userType === 'investor' && <InvestorPricingSection />}
-      {userType === 'incubator' && <IncubatorPricingSection />}
+      {context ? (
+        <>
+          {userType === 'business' && <BusinessPricingSection />}
+          {userType === 'investor' && <InvestorPricingSection />}
+          {userType === 'incubator' && <IncubatorPricingSection />}
+        </>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <PricingTier
+            name="Starter"
+            price="$99"
+            description="Perfect for entrepreneurs just getting started"
+            features={[
+              "Basic startup profile creation",
+              "2 hours monthly mentoring",
+              "Pitch deck review and feedback",
+              "Basic analytics dashboard",
+              "Standard customer support"
+            ]}
+          />
+          <PricingTier
+            name="Growth"
+            price="$299"
+            description="Ideal for growing startups seeking guidance"
+            features={[
+              "All Starter features",
+              "4 hours monthly advisory sessions",
+              "Priority investor matching",
+              "Advanced analytics and insights",
+              "Video conferencing tools",
+              "Dedicated account manager"
+            ]}
+            isPopular
+          />
+          <PricingTier
+            name="Scale"
+            price="$599"
+            description="Full-service solution for scaling startups"
+            features={[
+              "All Growth features",
+              "Unlimited advisory sessions",
+              "Premium investor network access",
+              "Custom due diligence support",
+              "White-label platform options",
+              "Priority customer support"
+            ]}
+          />
+        </div>
+      )}
     </section>
   );
 };

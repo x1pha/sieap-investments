@@ -2,12 +2,12 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 export type UserType = 'business' | 'investor' | 'incubator';
 
-interface UserTypeContextType {
+export interface UserTypeContextType {
   userType: UserType;
   setUserType: (type: UserType) => void;
 }
 
-const UserTypeContext = createContext<UserTypeContextType | undefined>(undefined);
+export const UserTypeContext = createContext<UserTypeContextType | undefined>(undefined);
 
 export const UserTypeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [userType, setUserType] = useState<UserType>('business');
