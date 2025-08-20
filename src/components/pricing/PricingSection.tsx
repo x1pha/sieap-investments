@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
-import { Check } from "lucide-react";
+import { Check, Building2, Users, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CardSpotlight } from "./CardSpotlight";
-import { useContext } from "react";
-import { UserTypeContext, UserTypeContextType } from "@/contexts/UserTypeContext";
+import { useContext, useState } from "react";
+import { UserTypeContext, UserTypeContextType, UserType } from "@/contexts/UserTypeContext";
 import { BusinessPricingSection } from "./BusinessPricingSection";
 import { InvestorPricingSection } from "./InvestorPricingSection";
 import { IncubatorPricingSection } from "./IncubatorPricingSection";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const PricingTier = ({
   name,
@@ -51,7 +52,8 @@ const PricingTier = ({
 
 export const PricingSection = () => {
   const context = useContext(UserTypeContext);
-  const userType = context?.userType || 'business';
+  const [localUserType, setLocalUserType] = useState<UserType>('business');
+  const userType = context?.userType || localUserType;
 
   const getTitleText = () => {
     switch (userType) {
@@ -95,10 +97,46 @@ export const PricingSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.5 }}
-          className="text-lg text-gray-400"
+          className="text-lg text-gray-400 mb-8"
         >
           {getDescriptionText()}
         </motion.p>
+        
+        {/* User Type Toggle - only show when not in context (standalone page) */}
+        {!context && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="flex justify-center mb-8"
+          >
+            <Tabs value={userType} onValueChange={(value) => setLocalUserType(value as UserType)} className="w-auto">
+              <TabsList className="grid grid-cols-3 h-12 bg-secondary/50 backdrop-blur-sm">
+                <TabsTrigger 
+                  value="business" 
+                  className="flex items-center gap-2 text-sm font-medium h-10 px-4 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                >
+                  <Building2 className="w-4 h-4" />
+                  Business
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="investor" 
+                  className="flex items-center gap-2 text-sm font-medium h-10 px-4 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                >
+                  <Users className="w-4 h-4" />
+                  Investor
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="incubator" 
+                  className="flex items-center gap-2 text-sm font-medium h-10 px-4 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                >
+                  <Rocket className="w-4 h-4" />
+                  Incubator
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
+          </motion.div>
+        )}
       </div>
 
       {context ? (
@@ -108,47 +146,11 @@ export const PricingSection = () => {
           {userType === 'incubator' && <IncubatorPricingSection />}
         </>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          <PricingTier
-            name="Starter"
-            price="$99"
-            description="Perfect for entrepreneurs just getting started"
-            features={[
-              "Basic startup profile creation",
-              "2 hours monthly mentoring",
-              "Pitch deck review and feedback",
-              "Basic analytics dashboard",
-              "Standard customer support"
-            ]}
-          />
-          <PricingTier
-            name="Growth"
-            price="$299"
-            description="Ideal for growing startups seeking guidance"
-            features={[
-              "All Starter features",
-              "4 hours monthly advisory sessions",
-              "Priority investor matching",
-              "Advanced analytics and insights",
-              "Video conferencing tools",
-              "Dedicated account manager"
-            ]}
-            isPopular
-          />
-          <PricingTier
-            name="Scale"
-            price="$599"
-            description="Full-service solution for scaling startups"
-            features={[
-              "All Growth features",
-              "Unlimited advisory sessions",
-              "Premium investor network access",
-              "Custom due diligence support",
-              "White-label platform options",
-              "Priority customer support"
-            ]}
-          />
-        </div>
+        <>
+          {userType === 'business' && <BusinessPricingSection />}
+          {userType === 'investor' && <InvestorPricingSection />}
+          {userType === 'incubator' && <IncubatorPricingSection />}
+        </>
       )}
     </section>
   );
