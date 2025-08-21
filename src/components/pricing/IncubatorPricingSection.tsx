@@ -44,7 +44,7 @@ const IncubatorTier = ({ name, price, description, features, isPopular }: typeof
   <CardSpotlight>
     <Card className="relative h-full bg-transparent border-border/50">
       {isPopular && (
-        <Badge className="absolute top-8 left-1/2 transform -translate-x-1/2 bg-primary text-black">
+        <Badge className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-primary text-black">
           Most Popular
         </Badge>
       )}
