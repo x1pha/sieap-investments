@@ -41,7 +41,7 @@ const InvestorTier = ({ name, price, description, features, limitations, isPopul
   <CardSpotlight>
     <Card className="relative h-full bg-transparent border-border/50">
       {isPopular && (
-        <Badge className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-primary text-black">
+        <Badge className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-primary text-black scale-[0.8]">
           Most Popular
         </Badge>
       )}
