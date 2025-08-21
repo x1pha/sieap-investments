@@ -108,7 +108,7 @@ const Navigation = ({ userType = "business", onTypeChange }: NavigationProps) =>
           }} className="text-sm text-muted-foreground hover:text-foreground transition-all duration-300">
                 {item.name}
               </a>)}
-            <Button onClick={() => scrollToSection('cta')} size="sm" className="button-gradient">
+            <Button onClick={() => window.location.href = '/business'} size="sm" className="button-gradient">
               Get Started
             </Button>
           </div>
@@ -161,7 +161,7 @@ const Navigation = ({ userType = "business", onTypeChange }: NavigationProps) =>
                     </a>)}
                   <Button onClick={() => {
                   setIsMobileMenuOpen(false);
-                  scrollToSection('cta');
+                  window.location.href = '/business';
                 }} className="button-gradient mt-4">
                     Get Started
                   </Button>
