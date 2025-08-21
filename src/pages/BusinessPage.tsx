@@ -157,7 +157,7 @@ export default function BusinessPage() {
                 className="flex items-center gap-3 p-4 bg-card/50 rounded-lg border border-border/50"
               >
                 <Award className="w-6 h-6 text-primary flex-shrink-0" />
-                <span className="font-medium">Powered by Sapio Analytics</span>
+                <span className="font-medium">{accreditation}</span>
               </motion.div>
             ))}
           </div>
