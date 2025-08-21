@@ -39,10 +39,12 @@ export default function BusinessPage() {
   ];
 
   const accreditations = [
-    "Certified Business Incubator", "SECP Registered Investment Advisory",
-    "ISO 27001 Certified", "Member of National Incubator Association",
-    "Accredited by Startup Pakistan", "Partner with Leading Universities",
-    "Startup India"
+    "Certified by Startup India Initiative",
+    "SECP Registered Investment Advisory",
+    "Recognized by TIFAC, Government of India",
+    "Member of Technology Business Incubator Association of India",
+    "Accredited by Startup India",
+    "Powered by Sapio Analytics India"
   ];
 
   return (
