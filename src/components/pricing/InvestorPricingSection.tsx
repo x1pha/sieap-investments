@@ -78,7 +78,7 @@ const InvestorTier = ({ name, price, description, features, limitations, isPopul
         )}
         
         <Button 
-          className={`w-full mt-8 ${isPopular ? 'button-gradient text-white' : 'bg-secondary hover:bg-secondary/80'}`}
+          className={`w-full mt-8 ${isPopular ? 'button-gradient' : 'bg-secondary hover:bg-secondary/80'}`}
           size="lg"
         >
           Get Started

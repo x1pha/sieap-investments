@@ -58,7 +58,7 @@ export default function InvestorPage() {
               Connect with promising startups, access exclusive deal flow, and build a diversified portfolio with professional support.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="button-gradient text-white">
+              <Button size="lg" className="button-gradient">
                 Start Investing
               </Button>
               <Button variant="outline" size="lg">

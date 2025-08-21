@@ -70,7 +70,7 @@ export default function BusinessPage() {
             {/* Registration Type Toggle */}
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="button-gradient text-white">
+              <Button size="lg" className="button-gradient">
                 {registrationType === "business" && "Register Your Startup"}
                 {registrationType === "investor" && "Register as Investor"}
                 {registrationType === "incubator" && "Register Your Incubator"}

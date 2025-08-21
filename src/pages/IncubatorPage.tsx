@@ -58,7 +58,7 @@ export default function IncubatorPage() {
               Comprehensive platform to manage your startup portfolio, host demo days, and accelerate your incubation process.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button className="button-gradient text-white" asChild>
+          <Button className="button-gradient" asChild>
             <a href="/startup-tracking">View Startup Dashboard</a>
           </Button>
               <Button variant="outline" size="lg">
