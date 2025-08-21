@@ -55,8 +55,8 @@ const Index = () => {
             transition={{ delay: 0.4 }}
             className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl text-left"
           >
-            Experience seamless cryptocurrency trading with advanced features, real-time analytics, and institutional-grade security.{" "}
-            <span className="text-white">Start trading in minutes.</span>
+            Experience intelligent startup-investor matching with AI-powered insights, comprehensive advisory services, and enterprise-grade security.{" "}
+            <span className="text-white">Start connecting in minutes.</span>
           </motion.p>
           
           <motion.div
