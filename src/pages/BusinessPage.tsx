@@ -41,7 +41,8 @@ export default function BusinessPage() {
   const accreditations = [
     "Certified Business Incubator", "SECP Registered Investment Advisory",
     "ISO 27001 Certified", "Member of National Incubator Association",
-    "Accredited by Startup Pakistan", "Partner with Leading Universities"
+    "Accredited by Startup Pakistan", "Partner with Leading Universities",
+    "Startup India"
   ];
 
   return (
