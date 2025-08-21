@@ -66,33 +66,6 @@ export default function BusinessPage() {
             </p>
             
             {/* Registration Type Toggle */}
-            <div className="mb-8">
-              <Tabs value={registrationType} onValueChange={setRegistrationType} className="w-full max-w-md mx-auto">
-                <TabsList className="grid grid-cols-3 h-14 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-1 shadow-2xl">
-                  <TabsTrigger 
-                    value="business" 
-                    className="flex items-center gap-2 text-sm font-medium h-12 px-4 rounded-xl transition-all duration-300 ease-out data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-primary/80 data-[state=active]:text-black data-[state=active]:shadow-lg data-[state=active]:shadow-primary/25 data-[state=active]:scale-105 hover:bg-white/5 hover:scale-102 text-gray-300 hover:text-white cursor-pointer"
-                  >
-                    <Building2 className="w-4 h-4" />
-                    <span className="font-semibold">Business</span>
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="investor" 
-                    className="flex items-center gap-2 text-sm font-medium h-12 px-4 rounded-xl transition-all duration-300 ease-out data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-primary/80 data-[state=active]:text-black data-[state=active]:shadow-lg data-[state=active]:shadow-primary/25 data-[state=active]:scale-105 hover:bg-white/5 hover:scale-102 text-gray-300 hover:text-white cursor-pointer"
-                  >
-                    <Users className="w-4 h-4" />
-                    <span className="font-semibold">Investor</span>
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="incubator" 
-                    className="flex items-center gap-2 text-sm font-medium h-12 px-4 rounded-xl transition-all duration-300 ease-out data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-primary/80 data-[state=active]:text-black data-[state=active]:shadow-lg data-[state=active]:shadow-primary/25 data-[state=active]:scale-105 hover:bg-white/5 hover:scale-102 text-gray-300 hover:text-white cursor-pointer"
-                  >
-                    <Rocket className="w-4 h-4" />
-                    <span className="font-semibold">Incubator</span>
-                  </TabsTrigger>
-                </TabsList>
-              </Tabs>
-            </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="button-gradient text-white">
