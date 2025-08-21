@@ -138,7 +138,7 @@ export const PricingSection = () => {
               </Tabs>
               
               {/* Subtle glow effect */}
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/20 via-transparent to-primary/20 rounded-2xl blur opacity-30 animate-pulse"></div>
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/20 via-transparent to-primary/20 rounded-2xl blur opacity-30 animate-pulse pointer-events-none"></div>
             </div>
           </motion.div>
         )}
