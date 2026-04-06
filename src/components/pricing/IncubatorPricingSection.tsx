@@ -8,7 +8,7 @@ import { CardSpotlight } from "./CardSpotlight";
 const incubatorTiers = [
   {
     name: "Scout Incubator",
-    price: "$299",
+    price: "₹24,999",
     description: "Essential portfolio tracking for growing incubators",
     features: [
       "Portfolio management for up to 50 startups",
@@ -23,7 +23,7 @@ const incubatorTiers = [
   },
   {
     name: "Accelerate Incubator",
-    price: "$799",
+    price: "₹64,999",
     description: "Complete incubator management platform",
     features: [
       "Everything in Scout PLUS:",

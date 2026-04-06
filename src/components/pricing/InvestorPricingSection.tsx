@@ -8,7 +8,7 @@ import { CardSpotlight } from "./CardSpotlight";
 const investorTiers = [
   {
     name: "Solo Investor",
-    price: "$199",
+    price: "₹14,999",
     description: "Perfect for individual angel investors",
     features: [
       "Deal flow access to 500+ startups",
@@ -22,8 +22,8 @@ const investorTiers = [
     isPopular: false
   },
   {
-    name: "Managed Investor", 
-    price: "$499",
+    name: "Managed Investor",
+    price: "₹39,999",
     description: "Premium solution with professional services",
     features: [
       "Everything in Solo PLUS:",

@@ -6,46 +6,46 @@ import { Card } from "./ui/card";
 
 const testimonials = [
   {
-    name: "Michael Chen",
-    role: "Professional Trader",
+    name: "Priya Sharma",
+    role: "Founder, HealthTech Startup",
     image: "https://avatars.githubusercontent.com/u/1234567?v=4",
-    content: "The real-time market data and advanced trading features have significantly improved my trading performance. The platform's security measures give me peace of mind."
+    content: "SIEAP helped us connect with the right investors within weeks. The mentorship and advisory support accelerated our Series A journey significantly."
   },
   {
-    name: "Sarah Johnson",
-    role: "Crypto Fund Manager",
+    name: "Rajesh Mehta",
+    role: "Angel Investor",
     image: "https://avatars.githubusercontent.com/u/2345678?v=4",
-    content: "CryptoTrade's institutional-grade tools have transformed our trading strategy. The API integration and automated features have saved us countless hours."
+    content: "The deal flow quality on SIEAP is exceptional. The due diligence tools and portfolio tracking have streamlined how I evaluate early-stage startups."
   },
   {
-    name: "David Wilson",
-    role: "Early Crypto Investor",
+    name: "Ananya Reddy",
+    role: "Incubator Director",
     image: "https://avatars.githubusercontent.com/u/3456789?v=4",
-    content: "The customer support is exceptional, and the platform's intuitive design made getting started with crypto trading seamless. A game-changer for both beginners and pros."
+    content: "Managing our cohort of 30+ startups became effortless with SIEAP. Demo day hosting and mentor coordination features are game-changers."
   },
   {
-    name: "Emily Zhang",
-    role: "DeFi Developer",
+    name: "Vikram Patel",
+    role: "Co-founder, EdTech Platform",
     image: "https://avatars.githubusercontent.com/u/4567890?v=4",
-    content: "We've seen remarkable improvements in our trading efficiency since switching to CryptoTrade. The smart order routing and liquidity aggregation are particularly impressive."
+    content: "From pitch deck reviews to investor introductions — SIEAP's ecosystem approach gave us everything we needed to go from idea to funded startup."
   },
   {
-    name: "James Rodriguez",
-    role: "Crypto Security Expert",
+    name: "Kavitha Nair",
+    role: "Venture Partner",
     image: "https://avatars.githubusercontent.com/u/5678901?v=4",
-    content: "The security features are robust and the regular updates keep us ahead of emerging threats. It's exactly what the crypto industry needed."
+    content: "The AI-powered matching is remarkably accurate. We've made three investments through SIEAP and the quality of startups keeps improving."
   },
   {
-    name: "Lisa Thompson",
-    role: "Portfolio Manager",
+    name: "Arjun Desai",
+    role: "TBI Programme Manager",
     image: "https://avatars.githubusercontent.com/u/6789012?v=4",
-    content: "The platform's ability to handle complex trading strategies while maintaining simplicity in its interface is remarkable. It's been invaluable for our portfolio management."
+    content: "SIEAP's white-label solution let us brand the platform as our own. Our startups love the progress tracking and investor-readiness features."
   }
 ];
 
 const TestimonialsSection = () => {
   return (
-    <section className="py-20 overflow-hidden bg-black">
+    <section className="py-20 overflow-hidden">
       <div className="container px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -54,9 +54,9 @@ const TestimonialsSection = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl font-normal mb-4">Trusted by Traders</h2>
+          <h2 className="text-5xl font-normal mb-4">Trusted by the Ecosystem</h2>
           <p className="text-muted-foreground text-lg">
-            Join thousands of satisfied traders on CryptoTrade
+            Startups, investors, and incubators growing together on SIEAP
           </p>
         </motion.div>
 
@@ -64,18 +64,18 @@ const TestimonialsSection = () => {
           <div className="relative flex overflow-hidden py-4">
             <div className="animate-marquee flex min-w-full shrink-0 items-stretch gap-8">
               {testimonials.map((testimonial, index) => (
-                <Card key={`${index}-1`} className="w-[400px] shrink-0 bg-black/40 backdrop-blur-xl border-white/5 hover:border-white/10 transition-all duration-300 p-8">
+                <Card key={`${index}-1`} className="w-[400px] shrink-0 bg-secondary/30 backdrop-blur-xl border-border/50 hover:border-border transition-all duration-300 p-8">
                   <div className="flex items-center gap-4 mb-6">
                     <Avatar className="h-12 w-12">
                       <AvatarImage src={testimonial.image} />
                       <AvatarFallback>{testimonial.name[0]}</AvatarFallback>
                     </Avatar>
                     <div>
-                      <h4 className="font-medium text-white/90">{testimonial.name}</h4>
-                      <p className="text-sm text-white/60">{testimonial.role}</p>
+                      <h4 className="font-medium text-foreground/90">{testimonial.name}</h4>
+                      <p className="text-sm text-muted-foreground">{testimonial.role}</p>
                     </div>
                   </div>
-                  <p className="text-white/70 leading-relaxed">
+                  <p className="text-foreground/70 leading-relaxed">
                     {testimonial.content}
                   </p>
                 </Card>
@@ -83,18 +83,18 @@ const TestimonialsSection = () => {
             </div>
             <div className="animate-marquee flex min-w-full shrink-0 items-stretch gap-8">
               {testimonials.map((testimonial, index) => (
-                <Card key={`${index}-2`} className="w-[400px] shrink-0 bg-black/40 backdrop-blur-xl border-white/5 hover:border-white/10 transition-all duration-300 p-8">
+                <Card key={`${index}-2`} className="w-[400px] shrink-0 bg-secondary/30 backdrop-blur-xl border-border/50 hover:border-border transition-all duration-300 p-8">
                   <div className="flex items-center gap-4 mb-6">
                     <Avatar className="h-12 w-12">
                       <AvatarImage src={testimonial.image} />
                       <AvatarFallback>{testimonial.name[0]}</AvatarFallback>
                     </Avatar>
                     <div>
-                      <h4 className="font-medium text-white/90">{testimonial.name}</h4>
-                      <p className="text-sm text-white/60">{testimonial.role}</p>
+                      <h4 className="font-medium text-foreground/90">{testimonial.name}</h4>
+                      <p className="text-sm text-muted-foreground">{testimonial.role}</p>
                     </div>
                   </div>
-                  <p className="text-white/70 leading-relaxed">
+                  <p className="text-foreground/70 leading-relaxed">
                     {testimonial.content}
                   </p>
                 </Card>
