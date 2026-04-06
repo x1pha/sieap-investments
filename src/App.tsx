@@ -25,6 +25,9 @@ const App = () => (
             <Route path="/investor" element={<MainIndex />} />
             <Route path="/incubator" element={<MainIndex />} />
             <Route path="/startup-tracking" element={<StartupTrackingPage />} />
+            <Route path="/for-startups" element={<ForStartups />} />
+            <Route path="/for-investors" element={<ForInvestors />} />
+            <Route path="/for-incubators" element={<ForIncubators />} />
           </Routes>
         </BrowserRouter>
       </div>
