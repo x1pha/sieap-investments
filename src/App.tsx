@@ -6,6 +6,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import MainIndex from "./pages/MainIndex";
 import StartupTrackingPage from "./pages/StartupTrackingPage";
+import ForStartups from "./pages/ForStartups";
+import ForInvestors from "./pages/ForInvestors";
+import ForIncubators from "./pages/ForIncubators";
 
 const queryClient = new QueryClient();
 
