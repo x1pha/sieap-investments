@@ -8,20 +8,20 @@ import { CardSpotlight } from "./CardSpotlight";
 const businessTiers = [
   {
     name: "Starter",
-    price: "$99",
+    price: "₹7,999",
     description: "Perfect for entrepreneurs just getting started",
     features: [
       "Basic startup profile creation and investor database access",
       "2 hours monthly mentoring sessions",
       "Pitch deck review and feedback",
-      "Basic analytics dashboard", 
+      "Basic analytics dashboard",
       "Standard customer support"
     ],
     isPopular: false
   },
   {
     name: "Growth",
-    price: "$299",
+    price: "₹24,999",
     description: "Ideal for growing startups seeking active guidance",
     features: [
       "All Starter features",
@@ -35,7 +35,7 @@ const businessTiers = [
   },
   {
     name: "Scale",
-    price: "$599",
+    price: "₹49,999",
     description: "Full-service solution for scaling startups",
     features: [
       "All Growth features",
