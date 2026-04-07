@@ -58,7 +58,7 @@ export default function ForIncubators() {
             <span className="text-primary">Don't Replace It.</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.6 }} className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Partner with SIEAP to give your startups standardised evaluation, professional valuation, and direct investor access — through a dedicated digital portal. You keep visibility. They get capital.
+            Partner with SIEAP for standardised evaluation, professional valuation, and direct investor access — through a dedicated digital portal.
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }}>
             <Button size="lg" className="button-gradient text-black font-semibold mt-10" onClick={() => window.location.href = "/apply"}>

@@ -7,43 +7,44 @@ import { CardSpotlight } from "./CardSpotlight";
 
 const businessTiers = [
   {
-    name: "Starter",
-    price: "₹7,999",
-    description: "Perfect for entrepreneurs just getting started",
+    name: "Basic",
+    price: "₹999",
+    description: "Register + Core Access for early-stage founders",
     features: [
-      "Basic startup profile creation and investor database access",
-      "2 hours monthly mentoring sessions",
-      "Pitch deck review and feedback",
-      "Basic analytics dashboard",
-      "Standard customer support"
+      "Platform registration & startup dashboard",
+      "Community & webinar access",
+      "Ecosystem access",
+      "Service partner discounts (legal, finance, GTM, talent)",
+      "Co-hosted webinar participation"
     ],
     isPopular: false
   },
   {
     name: "Growth",
-    price: "₹24,999",
-    description: "Ideal for growing startups seeking active guidance",
+    price: "₹3,499",
+    description: "Mentorship + Pitch Review for scaling startups",
     features: [
-      "All Starter features",
-      "4 hours monthly advisory sessions (legal, financial, strategic)",
-      "Priority investor matching and introductions",
-      "Advanced analytics and market insights",
-      "Video conferencing and collaboration tools",
-      "Dedicated account manager"
+      "Everything in Basic",
+      "Core mentorship content library",
+      "1:1 mentor sessions (2x/month)",
+      "Pitch deck review & refinement",
+      "Growth strategy support",
+      "Competitive analysis & positioning"
     ],
     isPopular: true
   },
   {
-    name: "Scale",
-    price: "₹49,999",
-    description: "Full-service solution for scaling startups",
+    name: "Premium",
+    price: "₹8,999",
+    description: "Full Service + Investor Matching",
     features: [
-      "All Growth features",
-      "Unlimited advisory sessions with dedicated advisor",
-      "Premium investor network access",
-      "Custom due diligence support",
-      "White-label platform options",
-      "Priority customer support and SLA"
+      "Everything in Growth",
+      "Priority investor matching",
+      "Full SIEAP valuation (3-method + CA sign-off)",
+      "Dedicated mentor assigned",
+      "Data room preparation",
+      "Investor readiness sign-off",
+      "4x monthly 1:1 mentor sessions"
     ],
     isPopular: false
   }

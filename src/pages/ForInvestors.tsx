@@ -65,7 +65,7 @@ export default function ForInvestors() {
             <span className="text-primary">Pre-Verified.</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.6 }} className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Every startup on SIEAP has completed 19–29 days of structured evaluation with CA-verified financials. 27 parameters. 5 pillars. No self-reported data. You see the evidence before you invest a single hour.
+            Every startup on SIEAP has completed 19–29 days of structured evaluation with CA-verified financials. 27 parameters. 5 pillars. No self-reported data.
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }}>
             <Button size="lg" className="button-gradient text-black font-semibold mt-10" onClick={() => window.location.href = "/apply"}>
