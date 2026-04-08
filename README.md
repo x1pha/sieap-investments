@@ -1,69 +1,38 @@
-# Welcome to your Lovable project
+# SIEAP Investments
 
-## Project info
+**SIEAP** is an India-based dual-sided investment management platform connecting startups, incubators, and investors. It provides end-to-end support from pre-idea to active investment, with real-time valuations, mentorship stages, and a stock-market-style marketplace charging 1% on investments.
 
-**URL**: https://lovable.dev/projects/92dc0c12-c831-4ed8-9ab7-0f875920f45d
+## 🚀 Features
 
-## How can I edit this code?
+- **Startup Marketplace**: Live dashboards for market cap, top gainers/decliners, sector analysis, and fundraising opportunities.
+- **Mentorship Pipeline**: 6 stages (Pre-Idea → Investor Ready) with tiered subscriptions (₹ Basic/Growth/Premium).
+- **Incubator Portals**: Dedicated dashboards and mentor access (portal license fees).
+- **Investor Tools**: Valuation, risk scores, momentum tracking, and direct contact.
+- **Compliance**: SEBI (IA/AIF), DPIIT/Startup India, RBI, MCA, GST-ready.
 
-There are several ways of editing your application.
+## 📱 Screenshots
 
-**Use Lovable**
+<img width="1376" height="768" alt="image" src="https://github.com/user-attachments/assets/e6760c9d-8407-4990-9ecf-0bc374ee10f8" />
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/92dc0c12-c831-4ed8-9ab7-0f875920f45d) and start prompting.
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🛠 Tech Stack
 
-**Use your preferred IDE**
+- Frontend: React + Vite + Tailwind CSS
+- UI: Dark mode, glassmorphism, responsive design
+- Deployment: Ready for Vercel/Netlify
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 💰 Revenue Model
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+1. 1% fee on investments (primary).
+2. Startup subscriptions.
+3. Incubator portal fees.
+4. Service commissions.
 
-Follow these steps:
+## 🔗 Links
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- [Live Demo](https://sieap-investments.vercel.app)
+- [Ecosystem](T-Hub, NASSCOM, IIM/IIT incubators, IAN, Mumbai Angels)
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## 📄 License
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with .
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/92dc0c12-c831-4ed8-9ab7-0f875920f45d) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+MIT License - Free to fork, modify, deploy.
