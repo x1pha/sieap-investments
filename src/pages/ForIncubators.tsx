@@ -84,7 +84,6 @@ export default function ForIncubators() {
               </div>
             </div>
             <div className="p-6 md:p-8">
-              {/* Summary Stats */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                 {[["12", "Referred Startups"], ["3", "At Stage 5"], ["1", "Funded"], ["₹45L", "Pipeline"]].map(([val, label]) => (
                   <div key={label} className="bg-secondary/50 rounded-lg p-4 text-center">
@@ -93,8 +92,6 @@ export default function ForIncubators() {
                   </div>
                 ))}
               </div>
-
-              {/* Table */}
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
