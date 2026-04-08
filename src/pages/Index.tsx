@@ -131,7 +131,7 @@ const Index = () => {
         >
           <div className="glass rounded-xl overflow-hidden">
             <img
-              src="/lovable-uploads/c32c6788-5e4a-4fee-afee-604b03113c7f.png"
+              src="/lovable-uploads/dashboard-preview.png"
               alt="SIEAP Dashboard"
               className="w-full h-auto"
             />
