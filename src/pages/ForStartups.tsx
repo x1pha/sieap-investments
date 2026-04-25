@@ -304,6 +304,11 @@ export default function ForStartups() {
                     {card.cta}
                   </Button>
                 </div>
+                {(card as any).footnote && (
+                  <p className="text-xs text-gray-500 italic mt-3 text-left px-1">
+                    {(card as any).footnote}
+                  </p>
+                )}
               </motion.div>
             ))}
           </div>
