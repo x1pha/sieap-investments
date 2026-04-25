@@ -9,6 +9,7 @@ import StartupTrackingPage from "./pages/StartupTrackingPage";
 import ForStartups from "./pages/ForStartups";
 import ForInvestors from "./pages/ForInvestors";
 import ForIncubators from "./pages/ForIncubators";
+import Pricing from "./pages/Pricing";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="/for-startups" element={<ForStartups />} />
             <Route path="/for-investors" element={<ForInvestors />} />
             <Route path="/for-incubators" element={<ForIncubators />} />
+            <Route path="/pricing" element={<Pricing />} />
           </Routes>
         </BrowserRouter>
       </div>
