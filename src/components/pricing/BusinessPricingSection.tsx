@@ -99,6 +99,11 @@ export const BusinessPricingSection = () => {
           transition={{ duration: 0.5, delay: index * 0.1 }}
         >
           <BusinessTier {...tier} />
+          {"footnote" in tier && tier.footnote && (
+            <p className="text-xs text-gray-500 italic mt-3 text-left">
+              {tier.footnote}
+            </p>
+          )}
         </motion.div>
       ))}
     </div>
