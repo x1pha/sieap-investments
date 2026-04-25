@@ -52,7 +52,7 @@ const businessTiers = [
   }
 ];
 
-const BusinessTier = ({ name, price, description, features, isPopular }: typeof businessTiers[0]) => (
+const BusinessTier = ({ name, price, description, features, isPopular }: { name: string; price: string; description: string; features: string[]; isPopular: boolean }) => (
   <CardSpotlight>
     <Card className="relative h-full bg-transparent border-border/50">
       {isPopular && (
