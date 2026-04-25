@@ -41,13 +41,14 @@ const businessTiers = [
     features: [
       "Everything in Growth",
       "Priority investor matching",
-      "Full SIEAP valuation (3-method + CA sign-off)",
+      "Full SIEAP valuation (3-method blend + CA sign-off*)",
       "Dedicated mentor assigned",
       "Data room preparation",
       "Investor readiness sign-off",
       "4x monthly 1:1 mentor sessions"
     ],
-    isPopular: false
+    isPopular: false,
+    footnote: "*CA sign-off is included in all Premium valuations. Registered Valuer charges may be additional, depending on valuation complexity and applicable regulatory requirements. SIEAP will advise on applicability before engagement."
   }
 ];
 
