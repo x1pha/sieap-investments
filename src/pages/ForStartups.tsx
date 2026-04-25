@@ -79,6 +79,7 @@ const pricingCards = [
       "Core mentorship content library",
       "1:1 mentor sessions (2x/month)",
       "Pitch deck review & refinement",
+      "Basic SIEAP valuation report with business growth pointers",
       "Growth strategy support",
       "Competitive analysis & positioning",
     ],
