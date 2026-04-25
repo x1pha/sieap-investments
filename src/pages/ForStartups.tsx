@@ -79,6 +79,7 @@ const pricingCards = [
       "Core mentorship content library",
       "1:1 mentor sessions (2x/month)",
       "Pitch deck review & refinement",
+      "Basic SIEAP valuation report with business growth pointers",
       "Growth strategy support",
       "Competitive analysis & positioning",
     ],
@@ -96,7 +97,7 @@ const pricingCards = [
     features: [
       "Everything in Growth",
       "Priority investor matching",
-      "Full SIEAP valuation (3-method blend + CA sign-off)",
+      "Full SIEAP valuation (3-method blend + CA sign-off*)",
       "Dedicated mentor assigned",
       "Data room preparation",
       "Investor readiness sign-off",
@@ -105,6 +106,7 @@ const pricingCards = [
     note: "+1% only on funding secured",
     bestFor: "Investor-ready startups seeking funded status",
     cta: "Start Premium",
+    footnote: "*CA sign-off is included in all Premium valuations. Registered Valuer charges may be additional, depending on valuation complexity and applicable regulatory requirements. SIEAP will advise on applicability before engagement.",
   },
 ];
 
@@ -255,54 +257,60 @@ export default function ForStartups() {
 
           <div className="grid md:grid-cols-3 gap-6">
             {pricingCards.map((card, i) => (
-              <motion.div
-                key={card.tier}
-                initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i}
-                className={`glass rounded-xl overflow-hidden flex flex-col ${card.isPopular ? "ring-2 ring-primary" : ""}`}
-              >
-                {/* Header bar */}
-                <div className={`${card.headerClass} px-6 py-4 flex items-center justify-between`}>
-                  <span className="font-bold text-sm text-foreground">{card.tier}</span>
-                  <span className="text-xs text-muted-foreground">{card.isPopular ? "" : card.label}</span>
-                  {card.isPopular && <Badge className="bg-primary text-black text-xs">Most Popular</Badge>}
-                </div>
-
-                <div className="p-6 flex flex-col flex-1">
-                  {/* Price */}
-                  <div className="mb-4">
-                    <div className="flex items-baseline gap-1">
-                      <span className="text-3xl font-bold text-primary">{card.price}</span>
-                      <span className="text-muted-foreground text-sm">/month</span>
-                    </div>
-                    <p className="text-xs text-muted-foreground mt-1">{card.annual}/year (save 17%)</p>
+              <div key={card.tier} className="flex flex-col">
+                <motion.div
+                  initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i}
+                  className={`glass rounded-xl overflow-hidden flex flex-col flex-1 ${card.isPopular ? "ring-2 ring-primary" : ""}`}
+                >
+                  {/* Header bar */}
+                  <div className={`${card.headerClass} px-6 py-4 flex items-center justify-between`}>
+                    <span className="font-bold text-sm text-foreground">{card.tier}</span>
+                    <span className="text-xs text-muted-foreground">{card.isPopular ? "" : card.label}</span>
+                    {card.isPopular && <Badge className="bg-primary text-black text-xs">Most Popular</Badge>}
                   </div>
 
-                  <p className="text-sm font-medium text-foreground mb-4">{card.tagline}</p>
+                  <div className="p-6 flex flex-col flex-1">
+                    {/* Price */}
+                    <div className="mb-4">
+                      <div className="flex items-baseline gap-1">
+                        <span className="text-3xl font-bold text-primary">{card.price}</span>
+                        <span className="text-muted-foreground text-sm">/month</span>
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-1">{card.annual}/year (save 17%)</p>
+                    </div>
 
-                  {/* Features */}
-                  <ul className="space-y-2.5 mb-6 flex-1">
-                    {card.features.map(f => (
-                      <li key={f} className="flex items-start gap-2 text-sm">
-                        <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                        <span className="text-foreground">{f}</span>
-                      </li>
-                    ))}
-                  </ul>
+                    <p className="text-sm font-medium text-foreground mb-4">{card.tagline}</p>
 
-                  {/* Bottom note */}
-                  <p className="text-xs text-primary font-medium mb-4">{card.note}</p>
+                    {/* Features */}
+                    <ul className="space-y-2.5 mb-6 flex-1">
+                      {card.features.map(f => (
+                        <li key={f} className="flex items-start gap-2 text-sm">
+                          <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                          <span className="text-foreground">{f}</span>
+                        </li>
+                      ))}
+                    </ul>
 
-                  <p className="text-xs text-muted-foreground mb-4">Best for: {card.bestFor}</p>
+                    {/* Bottom note */}
+                    <p className="text-xs text-primary font-medium mb-4">{card.note}</p>
 
-                  <Button
-                    className={`w-full ${card.isPopular ? "button-gradient text-black" : "bg-secondary hover:bg-secondary/80"}`}
-                    size="lg"
-                    onClick={() => window.location.href = "/apply"}
-                  >
-                    {card.cta}
-                  </Button>
-                </div>
-              </motion.div>
+                    <p className="text-xs text-muted-foreground mb-4">Best for: {card.bestFor}</p>
+
+                    <Button
+                      className={`w-full ${card.isPopular ? "button-gradient text-black" : "bg-secondary hover:bg-secondary/80"}`}
+                      size="lg"
+                      onClick={() => window.location.href = "/apply"}
+                    >
+                      {card.cta}
+                    </Button>
+                  </div>
+                </motion.div>
+                {(card as any).footnote && (
+                  <p className="text-xs text-gray-500 italic mt-3 text-left px-1">
+                    {(card as any).footnote}
+                  </p>
+                )}
+              </div>
             ))}
           </div>
 

@@ -1,50 +1,42 @@
+## Plan: Update Growth & Premium Tier Content + Add Valuer Footnote
 
+### Files that exist vs. specified
 
-## Plan: Update Pricing + Rewrite Three Audience Pages
+The user-mentioned files `src/pages/Pricing.tsx`, `src/components/PricingSection.tsx`, and `src/pages/FAQ.tsx` do **not** exist in this codebase. The actual pricing instances are:
 
-This is a significant rewrite of 4 files: update pricing across the site and fully rewrite the three audience pages with the new content, pricing structure, and visual design specified.
+1. `src/components/pricing/BusinessPricingSection.tsx` — startup/business tiers used by the homepage `PricingSection` (in `src/components/pricing/PricingSection.tsx`) and any page that mounts it.
+2. `src/pages/ForStartups.tsx` — inline `pricingCards` array.
 
-### Changes Overview
+There is no FAQ page (Task 4 target is missing). The closest is the inline `faqs` array inside `ForStartups.tsx`, which has different questions and no Q17 about subscription cost.
 
-**1. `src/pages/ForStartups.tsx`** — Full rewrite (largest change)
-- Hero: Keep existing, same content
-- 6-Stage Timeline: Keep existing interactive design, update tier labels ("Basic" not "Basic tier")
-- **Section 3 — Replace pricing table with 3 styled pricing cards** (biggest change):
-  - Basic ₹999/mo | ₹9,999/yr — dark navy header, "Entry Level" label
-  - Growth ₹3,499/mo | ₹34,999/yr — teal header, "Most Popular" badge
-  - Premium ₹8,999/mo | ₹89,999/yr — gold header, "Investor Ready" label
-  - Each card has specific features, tagline, "Best for" text, bottom accent note
-  - Footer note about included features + 1% success fee callout box
-- Service Partners: Update desc to include ESOP, SHA, fractional CxO
-- Evaluation: Update heading ("Not a Pitch Deck" instead of "Not Just a Pitch")
-- FAQ: Add "Can I switch tiers?" Q, update existing answers to match new wording
-- Update old prices in table headers (₹399→₹999, ₹1,499→₹3,499, ₹2,999→₹8,999) and annual line
+### Changes
 
-**2. `src/pages/ForInvestors.tsx`** — Minor content tweaks
-- Hero subtext: Remove last sentence, keep concise
-- FAQ answers: Minor wording updates to match new prompt
-- All content/structure stays the same
+**1. `src/components/pricing/BusinessPricingSection.tsx`**
 
-**3. `src/pages/ForIncubators.tsx`** — Minor content tweaks  
-- Hero subtext: Slightly shortened
-- FAQ: Update portal cost answer wording
-- Structure unchanged
+- **Growth tier** features: insert `"Basic SIEAP valuation report with business growth pointers"` immediately after `"Pitch deck review & refinement"`.
+- **Premium tier** features: change `"Full SIEAP valuation (3-method + CA sign-off)"` → `"Full SIEAP valuation (3-method blend + CA sign-off*)"` (also fixes the missing word "blend" to match the spec).
+- Render an italic muted footnote **only under the Premium card** (outside the `Card`, below the CTA), classes: `text-xs text-gray-500 italic mt-3 text-left`. Text:
+  > *CA sign-off is included in all Premium valuations. Registered Valuer charges may be additional, depending on valuation complexity and applicable regulatory requirements. SIEAP will advise on applicability before engagement.
+- Implementation: add an optional `footnote?: string` field on the `Premium` tier object, then render `{footnote && <p>...</p>}` inside the `motion.div` wrapper, after the `<BusinessTier />`.
 
-**4. `src/components/pricing/BusinessPricingSection.tsx`** — Update prices
-- Starter: ₹7,999 → ₹999
-- Growth: ₹24,999 → ₹3,499  
-- Scale: ₹49,999 → ₹8,999
-- Update tier names to Basic/Growth/Premium
+**2. `src/pages/ForStartups.tsx`**
 
-**5. `src/components/pricing/InvestorPricingSection.tsx`** — No price changes needed (investor has no subscription)
+- **Growth `pricingCards`** (lines ~77–84): insert `"Basic SIEAP valuation report with business growth pointers"` after `"Pitch deck review & refinement"`.
+- **Premium `pricingCards`** (line 99): update to `"Full SIEAP valuation (3-method blend + CA sign-off*)"`.
+- Add an optional `footnote?: string` field on the Premium card object.
+- In the cards grid render (lines 257–306), after the `motion.div` closes, render `{card.footnote && <p className="text-xs text-gray-500 italic mt-3 text-left">{card.footnote}</p>}` inside each tier's wrapper (visible only for Premium since only that card has the field).
 
-**6. `src/components/pricing/IncubatorPricingSection.tsx`** — No price changes needed (contact-based pricing)
+### Files NOT changed (and why)
 
-### Technical Details
+- `src/pages/Pricing.tsx` — does not exist.
+- `src/components/PricingSection.tsx` — does not exist (the actual pricing section is at `src/components/pricing/PricingSection.tsx`, which delegates to `BusinessPricingSection.tsx`; updating the latter covers it).
+- `src/pages/FAQ.tsx` — does not exist; the `ForStartups.tsx` inline FAQ has no equivalent Q17.
 
-- ForStartups pricing section: Replace the comparison table (lines 205-247) with a 3-card layout using styled dark cards with colored header bars (navy/teal/gold via Tailwind classes)
-- Cards will use the existing `glass` class + custom header bar colors via `bg-[#1a1f3a]`, `bg-teal-900`, `bg-amber-900/80`
-- Each card is self-contained with features list, price, CTA button
-- Add a callout box below cards with `border border-primary/30` styling
-- BusinessPricingSection prices updated to match new tiers for consistency across the site
+### Open question
 
+Task 4 (FAQ Q17) cannot be performed because no FAQ page exists. Two options for the user to choose after approval:
+
+- **A.** Skip Task 4 entirely.
+- **B.** Create a new `src/pages/FAQ.tsx` with the Q17 answer (and route `/faq`) — this is out of scope of "targeted content corrections" so flagging here.
+
+Tasks 1, 2, and 3 will be applied to `BusinessPricingSection.tsx` and `ForStartups.tsx` exactly as specified, with no styling, color, motion, or layout changes.

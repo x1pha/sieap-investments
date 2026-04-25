@@ -28,6 +28,7 @@ const businessTiers = [
       "Core mentorship content library",
       "1:1 mentor sessions (2x/month)",
       "Pitch deck review & refinement",
+      "Basic SIEAP valuation report with business growth pointers",
       "Growth strategy support",
       "Competitive analysis & positioning"
     ],
@@ -40,17 +41,18 @@ const businessTiers = [
     features: [
       "Everything in Growth",
       "Priority investor matching",
-      "Full SIEAP valuation (3-method + CA sign-off)",
+      "Full SIEAP valuation (3-method blend + CA sign-off*)",
       "Dedicated mentor assigned",
       "Data room preparation",
       "Investor readiness sign-off",
       "4x monthly 1:1 mentor sessions"
     ],
-    isPopular: false
+    isPopular: false,
+    footnote: "*CA sign-off is included in all Premium valuations. Registered Valuer charges may be additional, depending on valuation complexity and applicable regulatory requirements. SIEAP will advise on applicability before engagement."
   }
 ];
 
-const BusinessTier = ({ name, price, description, features, isPopular }: typeof businessTiers[0]) => (
+const BusinessTier = ({ name, price, description, features, isPopular }: { name: string; price: string; description: string; features: string[]; isPopular: boolean }) => (
   <CardSpotlight>
     <Card className="relative h-full bg-transparent border-border/50">
       {isPopular && (
@@ -97,6 +99,11 @@ export const BusinessPricingSection = () => {
           transition={{ duration: 0.5, delay: index * 0.1 }}
         >
           <BusinessTier {...tier} />
+          {"footnote" in tier && tier.footnote && (
+            <p className="text-xs text-gray-500 italic mt-3 text-left">
+              {tier.footnote}
+            </p>
+          )}
         </motion.div>
       ))}
     </div>
