@@ -1,42 +1,34 @@
-## Plan: Update Growth & Premium Tier Content + Add Valuer Footnote
+## Plan: Add `/pricing` page + extend homepage Pricing section
 
-### Files that exist vs. specified
+### New file: `src/pages/Pricing.tsx`
 
-The user-mentioned files `src/pages/Pricing.tsx`, `src/components/PricingSection.tsx`, and `src/pages/FAQ.tsx` do **not** exist in this codebase. The actual pricing instances are:
+Dedicated route at `/pricing`. Uses `Navigation`, `Footer`, dark theme, glass cards, Framer Motion. Sections in order:
 
-1. `src/components/pricing/BusinessPricingSection.tsx` — startup/business tiers used by the homepage `PricingSection` (in `src/components/pricing/PricingSection.tsx`) and any page that mounts it.
-2. `src/pages/ForStartups.tsx` — inline `pricingCards` array.
+1. **Hero** — headline "Pricing Built for Every Stage of Your Journey" + subtext.
+2. **Anchor nav bar** (Task 3) — 3 pill links scrolling to `#startup-plans`, `#standalone-report`, `#other-pricing`. Pills: `bg-white/10 hover:bg-white/20 text-gray-300 text-sm px-4 py-2 rounded-full transition-all`.
+3. **Startup Plans** (`id="startup-plans"`) — renders `<BusinessPricingSection />` (already has updated Growth/Premium tiers + Premium footnote).
+4. **Why Monthly? explainer** (Task 1) — heading "Why Monthly? Because Valuation Isn't a One-Time Event." + subtext, then 2×2 glass-card grid with icons `Clock`, `TrendingUp`, `Users`, `Percent` (lucide-react). Below: italic note "One-time engagement option available for standalone valuation reports. See below."
+5. **Standalone Valuation Report** (`id="standalone-report"`, Task 2) — heading "Just Need a Valuation? We Have That Too." + subtext. Single full-width glass card with: STANDALONE pill badge, title, price `₹15,000 – ₹25,000`, two-column included list (Check icons), italic footnote, CTA `Request Standalone Report` → `/apply` (`button-gradient`), comparison note below.
+6. **Other Pricing** (`id="other-pricing"`) — heading "Incubator & Investor Plans"; renders `<IncubatorPricingSection />` and `<InvestorPricingSection />`.
+7. **FAQ** (Task 4) — accordion with the standard pricing/subscription Q&As ending with the new "Is there a one-time option…" item using the exact answer text provided.
 
-There is no FAQ page (Task 4 target is missing). The closest is the inline `faqs` array inside `ForStartups.tsx`, which has different questions and no Q17 about subscription cost.
+### Edit: `src/App.tsx`
 
-### Changes
+Add `import Pricing from "./pages/Pricing";` and route `<Route path="/pricing" element={<Pricing />} />`.
 
-**1. `src/components/pricing/BusinessPricingSection.tsx`**
+### Edit: `src/components/pricing/PricingSection.tsx` (homepage)
 
-- **Growth tier** features: insert `"Basic SIEAP valuation report with business growth pointers"` immediately after `"Pitch deck review & refinement"`.
-- **Premium tier** features: change `"Full SIEAP valuation (3-method + CA sign-off)"` → `"Full SIEAP valuation (3-method blend + CA sign-off*)"` (also fixes the missing word "blend" to match the spec).
-- Render an italic muted footnote **only under the Premium card** (outside the `Card`, below the CTA), classes: `text-xs text-gray-500 italic mt-3 text-left`. Text:
-  > *CA sign-off is included in all Premium valuations. Registered Valuer charges may be additional, depending on valuation complexity and applicable regulatory requirements. SIEAP will advise on applicability before engagement.
-- Implementation: add an optional `footnote?: string` field on the `Premium` tier object, then render `{footnote && <p>...</p>}` inside the `motion.div` wrapper, after the `<BusinessTier />`.
+Insert the **Why Monthly? explainer** and **Standalone Valuation Report** card directly after the tier cards render block (and before the existing closing of the section). Both reuse the same content and styling specified above. Anchor nav and FAQ are NOT added here (they belong to the dedicated page only). The user-type toggle, tier cards, and motion behavior remain unchanged.
 
-**2. `src/pages/ForStartups.tsx`**
+### Styling notes (no palette changes)
 
-- **Growth `pricingCards`** (lines ~77–84): insert `"Basic SIEAP valuation report with business growth pointers"` after `"Pitch deck review & refinement"`.
-- **Premium `pricingCards`** (line 99): update to `"Full SIEAP valuation (3-method blend + CA sign-off*)"`.
-- Add an optional `footnote?: string` field on the Premium card object.
-- In the cards grid render (lines 257–306), after the `motion.div` closes, render `{card.footnote && <p className="text-xs text-gray-500 italic mt-3 text-left">{card.footnote}</p>}` inside each tier's wrapper (visible only for Premium since only that card has the field).
+- Glass cards reuse the existing `glass` utility class already used in `ForStartups.tsx`.
+- Section spacing: `py-24 md:py-32`, container `container px-4`.
+- Headings: `text-4xl md:text-5xl font-normal` with a `text-gradient` accent on a key word, matching the rest of the site.
+- Icons via lucide-react (`Clock`, `TrendingUp`, `Users`, `Percent`, `Check`).
+- All existing tokens (`text-foreground`, `text-muted-foreground`, `bg-secondary`, `button-gradient`, `text-primary`) retained. Only the explicit `text-white`, `text-gray-300`, `text-gray-400`, `text-gray-500`, `bg-white/10` classes from the spec are used verbatim where the user requested them.
 
-### Files NOT changed (and why)
+### Files NOT changed
 
-- `src/pages/Pricing.tsx` — does not exist.
-- `src/components/PricingSection.tsx` — does not exist (the actual pricing section is at `src/components/pricing/PricingSection.tsx`, which delegates to `BusinessPricingSection.tsx`; updating the latter covers it).
-- `src/pages/FAQ.tsx` — does not exist; the `ForStartups.tsx` inline FAQ has no equivalent Q17.
-
-### Open question
-
-Task 4 (FAQ Q17) cannot be performed because no FAQ page exists. Two options for the user to choose after approval:
-
-- **A.** Skip Task 4 entirely.
-- **B.** Create a new `src/pages/FAQ.tsx` with the Q17 answer (and route `/faq`) — this is out of scope of "targeted content corrections" so flagging here.
-
-Tasks 1, 2, and 3 will be applied to `BusinessPricingSection.tsx` and `ForStartups.tsx` exactly as specified, with no styling, color, motion, or layout changes.
+- `src/pages/ForStartups.tsx`, `ForInvestors.tsx`, `ForIncubators.tsx`, FAQ-related logic — untouched.
+- `BusinessPricingSection.tsx`, `IncubatorPricingSection.tsx`, `InvestorPricingSection.tsx` — reused as-is.
