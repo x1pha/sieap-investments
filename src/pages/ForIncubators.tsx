@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { SEOHead } from "@/components/SEOHead";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -48,6 +49,11 @@ const faqs = [
 export default function ForIncubators() {
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="For Incubators | SIEAP Partner Portal"
+        description="Partner with SIEAP for standardised startup evaluation, professional valuation, and direct investor access — with a dedicated digital portal."
+        canonical="https://sieapinvest.com/for-incubators"
+      />
       <Navigation />
 
       {/* Hero */}

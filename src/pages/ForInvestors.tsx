@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { SEOHead } from "@/components/SEOHead";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -55,6 +56,11 @@ const radarPillars = [
 export default function ForInvestors() {
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="For Investors | SIEAP — Pre-Vetted Startup Deal Flow India"
+        description="Access pre-vetted, CA-verified startups evaluated on a 100-point scorecard. SIEAP charges 1% on completed investments only. See evidence before you invest."
+        canonical="https://sieapinvest.com/for-investors"
+      />
       <Navigation />
 
       {/* Hero */}

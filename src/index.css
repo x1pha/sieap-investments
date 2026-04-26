@@ -72,3 +72,14 @@
 .button-gradient {
   @apply bg-gradient-to-r from-primary to-[#22c55e] hover:opacity-90 transition-opacity rounded-full text-black;
 }
+
+/* Accessibility: keyboard focus indicator */
+*:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+}
+
+/* Performance: font-display swap for any custom font faces */
+@font-face {
+  font-display: swap;
+}

@@ -3,6 +3,7 @@ import { Clock, TrendingUp, Users, Percent, Check } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { SEOHead } from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -86,6 +87,11 @@ const faqs = [
 const Pricing = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SEOHead
+        title="Pricing | SIEAP — Startup Subscription Plans India"
+        description="Basic ₹999/mo, Growth ₹3,499/mo, Premium ₹8,999/mo. Standalone valuation report ₹15,000–₹25,000. Zero cost for investors. 1% on completed investments."
+        canonical="https://sieapinvest.com/pricing"
+      />
       <Navigation />
 
       {/* Hero */}

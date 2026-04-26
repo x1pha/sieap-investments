@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SIEAP Insights</title>
+    <link>https://sieapinvest.com</link>
+    <description>Startup evaluation, investment frameworks, and building trust in India's ecosystem.</description>
+    <language>en-in</language>
+    <atom:link href="https://sieapinvest.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Why We Published Our Evaluation Framework</title>
+      <description>Most platforms hide their scoring. We published ours — all 100 points, 5 pillars, 27 sub-parameters.</description>
+      <pubDate>Mon, 06 Apr 2026 09:00:00 GMT</pubDate>
+      <link>https://sieapinvest.com/blog/why-we-published-our-evaluation-framework</link>
+      <guid>https://sieapinvest.com/blog/why-we-published-our-evaluation-framework</guid>
+    </item>
+    <item>
+      <title>SIEAP Scores Bronze on Its Own Scorecard</title>
+      <description>We scored ourselves 35-45. Bronze tier. Pre-revenue, three-person team. Publishing it openly.</description>
+      <pubDate>Sat, 04 Apr 2026 09:00:00 GMT</pubDate>
+      <link>https://sieapinvest.com/blog/sieap-scores-bronze-on-its-own-scorecard</link>
+      <guid>https://sieapinvest.com/blog/sieap-scores-bronze-on-its-own-scorecard</guid>
+    </item>
+    <item>
+      <title>The 100-Point Scorecard: 27 Parameters, 5 Pillars, One Score</title>
+      <description>How SIEAP evaluates startups — every pillar, every parameter, stage-calibrated weights explained.</description>
+      <pubDate>Thu, 02 Apr 2026 09:00:00 GMT</pubDate>
+      <link>https://sieapinvest.com/blog/the-100-point-scorecard-explained</link>
+      <guid>https://sieapinvest.com/blog/the-100-point-scorecard-explained</guid>
+    </item>
+    <item>
+      <title>5 Red Flags That Get a Startup Instantly Rejected</title>
+      <description>Not every startup makes it through SIEAP's evaluation. Here are the 5 automatic deal-breakers.</description>
+      <pubDate>Mon, 30 Mar 2026 09:00:00 GMT</pubDate>
+      <link>https://sieapinvest.com/blog/5-red-flags-instant-rejection</link>
+      <guid>https://sieapinvest.com/blog/5-red-flags-instant-rejection</guid>
+    </item>
+  </channel>
+</rss>

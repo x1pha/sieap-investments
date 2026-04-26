@@ -6,6 +6,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Badge } from "@/components/ui/badge";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { SEOHead } from "@/components/SEOHead";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -131,6 +132,11 @@ export default function ForStartups() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="For Startups | SIEAP — From Idea to Investment"
+        description="SIEAP mentors startups through 6 structured stages and evaluates them on a 100-point scorecard. Basic ₹999/mo | Growth ₹3,499/mo | Premium ₹8,999/mo."
+        canonical="https://sieapinvest.com/for-startups"
+      />
       <Navigation />
 
       {/* Hero */}

@@ -18,48 +18,55 @@ const Navigation = ({ userType = "business", onTypeChange }: NavigationProps) =>
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  const isHome = window.location.pathname === '/';
+
   const scrollToSection = (sectionId: string) => {
+    if (!isHome) {
+      const hash = sectionId === 'testimonials' ? 'testimonials' : sectionId;
+      window.location.href = `/#${hash}`;
+      return;
+    }
     if (sectionId === 'testimonials') {
       const testimonialSection = document.querySelector('.animate-marquee');
       if (testimonialSection) {
-        const yOffset = -100; // Offset to account for the fixed header
+        const yOffset = -100;
         const y = testimonialSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
-        window.scrollTo({
-          top: y,
-          behavior: 'smooth'
-        });
+        window.scrollTo({ top: y, behavior: 'smooth' });
       }
     } else if (sectionId === 'cta') {
       const ctaSection = document.querySelector('.button-gradient');
       if (ctaSection) {
         const yOffset = -100;
         const y = ctaSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
-        window.scrollTo({
-          top: y,
-          behavior: 'smooth'
-        });
+        window.scrollTo({ top: y, behavior: 'smooth' });
       }
     } else {
       const element = document.getElementById(sectionId);
       if (element) {
-        element.scrollIntoView({
-          behavior: 'smooth'
-        });
+        element.scrollIntoView({ behavior: 'smooth' });
       }
     }
   };
   const navItems = [{
     name: "Features",
-    href: "#features",
+    href: isHome ? "#features" : "/#features",
     onClick: () => scrollToSection('features')
   }, {
     name: "Prices",
-    href: "#pricing",
+    href: isHome ? "#pricing" : "/#pricing",
     onClick: () => scrollToSection('pricing')
   }, {
     name: "Testimonials",
-    href: "#testimonials",
+    href: isHome ? "#testimonials" : "/#testimonials",
     onClick: () => scrollToSection('testimonials')
+  }, {
+    name: "Traction",
+    href: "/traction",
+    onClick: () => { window.location.href = '/traction'; }
+  }, {
+    name: "About",
+    href: "/about",
+    onClick: () => { window.location.href = '/about'; }
   }];
   return <header className={`fixed top-3.5 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 rounded-full ${isScrolled ? "h-14 bg-[#1B1B1B]/40 backdrop-blur-xl border border-white/10 scale-95 w-[94%] max-w-4xl" : "h-14 bg-[#1B1B1B] w-[98%] max-w-5xl"}`}>
       <div className="mx-auto h-full px-6">
@@ -67,7 +74,7 @@ const Navigation = ({ userType = "business", onTypeChange }: NavigationProps) =>
           <div className="flex items-center gap-2">
             <a href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
               <img 
-                src="/lovable-uploads/0dbe1b75-2c74-4ff8-ba55-4be4d74abe72.png" 
+                src="/uploads/0dbe1b75-2c74-4ff8-ba55-4be4d74abe72.png" 
                 alt="SIEAP Logo" 
                 className="w-5 h-5" 
               />

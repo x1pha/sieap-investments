@@ -1,4 +1,4 @@
-import { Linkedin, Instagram, Twitter } from "lucide-react";
+import { Linkedin, Instagram, Twitter, Rss } from "lucide-react";
 import { Button } from "./ui/button";
 
 const Footer = () => {
@@ -10,32 +10,50 @@ const Footer = () => {
             <div className="space-y-4">
               <h3 className="font-medium text-lg">SIEAP Ecosystem</h3>
               <p className="text-sm text-muted-foreground">
-                Empowering startups, investors, and incubators with comprehensive ecosystem solutions.
+                Creating real-time liquidity in India's startup ecosystem through evaluation-first investment infrastructure.
               </p>
-               <div className="flex space-x-4">
-                <Button variant="ghost" size="icon">
-                  <Twitter className="w-4 h-4" />
+              <div className="flex space-x-4">
+                {/* TODO: Replace # with actual X/Twitter handle URL */}
+                <Button variant="ghost" size="icon" asChild>
+                  <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Follow SIEAP on X">
+                    <Twitter className="w-4 h-4" />
+                  </a>
                 </Button>
-                <Button variant="ghost" size="icon">
-                  <Linkedin className="w-4 h-4" />
+                {/* TODO: Replace # with actual LinkedIn company page URL */}
+                <Button variant="ghost" size="icon" asChild>
+                  <a href="https://www.linkedin.com/company/sieap-startup/" target="_blank" rel="noopener noreferrer" aria-label="Follow SIEAP on LinkedIn">
+                    <Linkedin className="w-4 h-4" />
+                  </a>
                 </Button>
-                <Button variant="ghost" size="icon">
-                  <Instagram className="w-4 h-4" />
+                <Button variant="ghost" size="icon" asChild>
+                  <a href="/rss.xml" aria-label="Subscribe to SIEAP RSS feed">
+                    <Rss className="w-4 h-4" />
+                  </a>
                 </Button>
               </div>
             </div>
 
             <div className="space-y-4">
-              <h4 className="font-medium">Services</h4>
+              <h4 className="font-medium">Platform</h4>
               <ul className="space-y-2">
                 <li>
-                  <a href="#features" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    Startup Registration
+                  <a href="/for-startups" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    For Startups
                   </a>
                 </li>
                 <li>
-                  <a href="#pricing" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    Pricing Plans
+                  <a href="/for-investors" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    For Investors
+                  </a>
+                </li>
+                <li>
+                  <a href="/for-incubators" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    For Incubators
+                  </a>
+                </li>
+                <li>
+                  <a href="/pricing" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    Pricing
                   </a>
                 </li>
               </ul>
@@ -45,13 +63,33 @@ const Footer = () => {
               <h4 className="font-medium">Resources</h4>
               <ul className="space-y-2">
                 <li>
-                  <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    Mentor Network
+                  <a href="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    About Us
+                  </a>
+                </li>
+                <li>
+                  <a href="/mentors" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    Mentor Panel
+                  </a>
+                </li>
+                <li>
+                  <a href="/traction" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    Traction
+                  </a>
+                </li>
+                <li>
+                  <a href="/traction?tab=blog" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    Blog
+                  </a>
+                </li>
+                <li>
+                  <a href="/traction?tab=updates" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    Announcements
                   </a>
                 </li>
                 <li>
                   <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    Startup Guide
+                    Mentor Network
                   </a>
                 </li>
               </ul>
@@ -61,22 +99,30 @@ const Footer = () => {
               <h4 className="font-medium">Legal</h4>
               <ul className="space-y-2">
                 <li>
-                  <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  <a href="/legal/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                     Privacy Policy
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  <a href="/legal/terms" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                     Terms of Service
+                  </a>
+                </li>
+                <li>
+                  <a href="/legal/disclaimer" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    Disclaimer
                   </a>
                 </li>
               </ul>
             </div>
           </div>
 
-          <div className="mt-8 pt-8 border-t border-white/10">
-            <p className="text-sm text-muted-foreground text-center">
+          <div className="mt-8 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p className="text-sm text-muted-foreground text-center sm:text-left">
               © {new Date().getFullYear()} SIEAP Group. All rights reserved.
+            </p>
+            <p className="text-xs text-muted-foreground/60 text-center">
+              Startup India Certified · Powered by Sapio Analytics
             </p>
           </div>
         </div>
