@@ -71,7 +71,7 @@ const team = [
   {
     initials: "VS",
     name: "Vaibhav Singh",
-    role: "Chief Growth Officer · Startup Pipeline · Incubator Network · E-Cells",
+    role: "Head of Growth and Strategy Department · Startup Pipeline · Incubator Network · E-Cells",
     bio: "Owns end-to-end startup acquisition and ecosystem partnerships. Activates SIEAP's college E-Cell network, incubator relationships, and Tier 2 city outreach. Brings measurable pipeline discipline and a 10% equity stake earned through conviction.",
     color: "from-blue-500/30 to-blue-500/10",
   },
