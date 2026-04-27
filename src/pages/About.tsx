@@ -57,14 +57,14 @@ const team = [
   {
     initials: "IS",
     name: "Ishaan Srivastava",
-    role: "Lead Founder · Strategy · Product · Investor Relations",
+    role: "Co-Founder · Strategy · Product · Operations · Evaluation Framework",
     bio: "Architect of the SIEAP evaluation framework and platform strategy. Leads valuation methodology, investor partnerships, and product roadmap. Built SIEAP from a conviction that India's founders deserve institutional-grade evaluation, not a listing page.",
     color: "from-primary/30 to-primary/10",
   },
   {
     initials: "AS",
     name: "Ashwin Srivastava",
-    role: "Co-Founder · Operations · Evaluation Framework",
+    role: "Co-Founder · Operations · Investor Relations",
     bio: "Drives SIEAP's operational backbone and evaluation rigour. Oversees the CA-verification pipeline, mentor coordination, and quality assurance across all startup assessments. Ensures every score on the platform reflects ground-truth evidence.",
     color: "from-purple-500/30 to-purple-500/10",
   },
