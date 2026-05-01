@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { TrendingUp, BarChart3, Shield, Users, Eye, Zap } from "lucide-react";
 import { InvestorPricingSection } from "@/components/pricing/InvestorPricingSection";
+import { SEOHead } from "@/components/SEOHead";
 
 export default function InvestorPage() {
   const features = [
@@ -40,6 +41,11 @@ export default function InvestorPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="For Investors | SIEAP Investments"
+        description="Access curated startup deal flow, due diligence support, and portfolio analytics for angel investors and VCs."
+        canonical="https://sieapinvest.com/investor"
+      />
       {/* Hero Section */}
       <section className="relative overflow-hidden py-20 px-4">
         <div className="container mx-auto text-center">

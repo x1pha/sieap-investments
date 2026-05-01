@@ -5,10 +5,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { SEOHead } from "@/components/SEOHead";
 import { blogPosts } from "@/config/blog-posts";
-
-function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
-}
+import { formatDate } from "@/lib/utils";
 
 function renderContent(content: string) {
   return content.split(/\n\n+/).map((block, i) => {

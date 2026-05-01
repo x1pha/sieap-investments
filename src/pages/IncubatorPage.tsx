@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Rocket, Users, BarChart3, Calendar, Globe, Star } from "lucide-react";
 import { IncubatorPricingSection } from "@/components/pricing/IncubatorPricingSection";
+import { SEOHead } from "@/components/SEOHead";
 
 export default function IncubatorPage() {
   const features = [
@@ -40,6 +41,11 @@ export default function IncubatorPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="For Incubators | SIEAP Investments"
+        description="Supercharge your incubator with SIEAP's ecosystem — manage cohorts, connect mentors, and grow your startup portfolio."
+        canonical="https://sieapinvest.com/incubator"
+      />
       {/* Hero Section */}
       <section className="relative overflow-hidden py-20 px-4">
         <div className="container mx-auto text-center">

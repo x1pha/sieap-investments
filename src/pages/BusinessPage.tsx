@@ -1,14 +1,91 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { SEOHead } from "@/components/SEOHead";
+import { X } from "lucide-react";
 import { CheckCircle, Users, Award, Target, BookOpen, TrendingUp, Building2, Rocket } from "lucide-react";
 import { BusinessPricingSection } from "@/components/pricing/BusinessPricingSection";
 
+function ConsultationModal({ onClose }: { onClose: () => void }) {
+  useEffect(() => {
+    // Load Tally embed script for dynamic height support
+    const TALLY_SRC = "https://tally.so/widgets/embed.js";
+    const loadEmbeds = () => {
+      if (typeof (window as any).Tally !== "undefined") {
+        (window as any).Tally.loadEmbeds();
+      } else {
+        document.querySelectorAll<HTMLIFrameElement>("iframe[data-tally-src]:not([src])").forEach((el) => {
+          el.src = el.dataset.tallySrc!;
+        });
+      }
+    };
+    if (typeof (window as any).Tally !== "undefined") {
+      loadEmbeds();
+    } else if (!document.querySelector(`script[src="${TALLY_SRC}"]`)) {
+      const s = document.createElement("script");
+      s.src = TALLY_SRC;
+      s.onload = loadEmbeds;
+      s.onerror = loadEmbeds;
+      document.body.appendChild(s);
+    } else {
+      loadEmbeds();
+    }
+
+    // Prevent body scroll while modal is open
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = ""; };
+  }, []);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.93, opacity: 0, y: 16 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.93, opacity: 0, y: 16 }}
+        transition={{ type: "spring", damping: 25, stiffness: 300 }}
+        className="relative w-full max-w-lg bg-[#111] rounded-2xl shadow-2xl flex flex-col max-h-[90vh]"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
+          <p className="font-semibold text-sm text-foreground">Startup Application</p>
+          <button
+            onClick={onClose}
+            className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+            aria-label="Close"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+        <div className="overflow-y-auto flex-1 p-4">
+          <iframe
+            data-tally-src="https://tally.so/embed/ob0p9N?alignLeft=1&hideTitle=1&dynamicHeight=1"
+            loading="lazy"
+            width="100%"
+            height="800"
+            frameBorder={0}
+            marginHeight={0}
+            marginWidth={0}
+            title="Startup Application"
+            className="w-full"
+          />
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
 export default function BusinessPage() {
   const [registrationType, setRegistrationType] = useState("business");
+  const [showConsultation, setShowConsultation] = useState(false);
+
   const services = [
     {
       title: "Pitch Review & Refinement",
@@ -16,7 +93,7 @@ export default function BusinessPage() {
       icon: <Target className="w-6 h-6" />
     },
     {
-      title: "Mentoring & Guidance", 
+      title: "Mentoring & Guidance",
       description: "One-on-one sessions with industry experts and successful entrepreneurs",
       icon: <Users className="w-6 h-6" />
     },
@@ -49,6 +126,11 @@ export default function BusinessPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="For Startups | SIEAP Investments"
+        description="Expert mentoring, investor connections, and legal support to scale your startup from idea to IPO."
+        canonical="https://sieapinvest.com/business"
+      />
       {/* Hero Section */}
       <section className="relative overflow-hidden py-20 px-4">
         <div className="container mx-auto text-center">
@@ -66,8 +148,6 @@ export default function BusinessPage() {
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
               Get expert mentoring, investor connections, and comprehensive support to scale your startup from idea to IPO.
             </p>
-            
-            {/* Registration Type Toggle */}
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="button-gradient">
@@ -75,7 +155,7 @@ export default function BusinessPage() {
                 {registrationType === "investor" && "Register as Investor"}
                 {registrationType === "incubator" && "Register Your Incubator"}
               </Button>
-              <Button variant="outline" size="lg">
+              <Button variant="outline" size="lg" onClick={() => setShowConsultation(true)}>
                 Book a Consultation
               </Button>
             </div>
@@ -168,6 +248,13 @@ export default function BusinessPage() {
 
       {/* Pricing Section */}
       <BusinessPricingSection />
+
+      {/* Consultation Modal */}
+      <AnimatePresence>
+        {showConsultation && (
+          <ConsultationModal onClose={() => setShowConsultation(false)} />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

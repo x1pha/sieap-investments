@@ -40,8 +40,9 @@ function saveCache(entry: CacheEntry) {
   } catch {}
 }
 
-// In production the Cloudflare Worker serves /api/linkedin-posts (see src/worker.ts).
-// In local dev set VITE_LI_FEED_URL to override; without it dev polling is a no-op.
+// In production the Cloudflare Worker serves /api/linkedin-posts.
+// In local dev set VITE_LI_FEED_URL to a full URL to enable polling;
+// without it dev polling is intentionally a no-op (uses seed data).
 const isLocalhost =
   typeof window !== "undefined" &&
   (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1");
@@ -53,10 +54,10 @@ const FEED_URL: string | undefined = isLocalhost
 async function fetchLatestPosts(): Promise<LinkedInPost[] | null> {
   if (!FEED_URL) return null;
   try {
-    const res = await fetch(FEED_URL, { signal: AbortSignal.timeout(10_000) });
+    const res = await fetch(FEED_URL, { signal: AbortSignal.timeout(15_000) });
     if (!res.ok) return null;
     const data = await res.json();
-    return Array.isArray(data?.posts) ? data.posts : null;
+    return Array.isArray(data?.posts) && data.posts.length > 0 ? data.posts : null;
   } catch {
     return null;
   }
@@ -67,36 +68,40 @@ export function LinkedInFeedProvider({ children }: { children: ReactNode }) {
   const [posts, setPosts] = useState<LinkedInPost[]>(cache?.posts ?? LINKEDIN_POSTS_SEED);
   const [lastFetchedAt, setLastFetchedAt] = useState<number | null>(cache?.fetchedAt ?? null);
   const [newPostCount, setNewPostCount] = useState(0);
+  // Track the latest known post ID via ref so it's always current inside the poll closure
   const knownLatestId = useRef<string>(cache?.latestId ?? SEED_LATEST_ID);
 
-  const poll = async () => {
-    const fresh = await fetchLatestPosts();
-    if (!fresh || fresh.length === 0) return;
-
-    const knownIdx = fresh.findIndex((p) => p.id === knownLatestId.current);
-    const incoming = knownIdx === -1 ? fresh : fresh.slice(0, knownIdx);
-
-    if (incoming.length > 0) {
-      const merged = [...incoming, ...posts];
-      setPosts(merged);
-      knownLatestId.current = fresh[0].id;
-      setNewPostCount((n) => n + incoming.length);
-      const noun = incoming.length === 1 ? "post" : "posts";
-      toast(`${incoming.length} new SIEAP ${noun} on LinkedIn`, {
-        description: incoming[0].content.slice(0, 80) + "…",
-        action: { label: "View", onClick: () => window.location.assign("/linkedin-gallery") },
-      });
-      saveCache({ posts: merged, fetchedAt: Date.now(), latestId: fresh[0].id });
-    }
-
-    setLastFetchedAt(Date.now());
-  };
-
   useEffect(() => {
+    const poll = async () => {
+      const fresh = await fetchLatestPosts();
+      // API unavailable or empty — keep current posts, don't change anything
+      if (!fresh) return;
+
+      // Always replace posts with the full fresh list from the API.
+      // This fixes the stale-closure bug (no merging with captured state)
+      // and ensures the display always reflects the latest Apify dataset.
+      setPosts(fresh);
+      saveCache({ posts: fresh, fetchedAt: Date.now(), latestId: fresh[0].id });
+      setLastFetchedAt(Date.now());
+
+      // Detect how many posts are newer than what we last knew about
+      const knownIdx = fresh.findIndex((p) => p.id === knownLatestId.current);
+      const newCount = knownIdx === -1 ? 0 : knownIdx; // knownIdx === 0 means no new posts
+
+      if (newCount > 0) {
+        knownLatestId.current = fresh[0].id;
+        setNewPostCount((n) => n + newCount);
+        const noun = newCount === 1 ? "post" : "posts";
+        toast(`${newCount} new SIEAP ${noun} on LinkedIn`, {
+          description: fresh[0].content.slice(0, 80) + "…",
+          action: { label: "View", onClick: () => window.location.assign("/traction") },
+        });
+      }
+    };
+
     poll();
     const id = setInterval(poll, POLL_INTERVAL_MS);
     return () => clearInterval(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -6,13 +6,10 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { SEOHead } from "@/components/SEOHead";
 import { blogPosts, type BlogPost } from "@/config/blog-posts";
+import { formatDate } from "@/lib/utils";
 
 type CategoryFilter = "All" | "Trust" | "Evaluation" | "Investing" | "Platform" | "Ecosystem";
 const categoryFilters: CategoryFilter[] = ["All", "Trust", "Evaluation", "Investing", "Platform", "Ecosystem"];
-
-function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
-}
 
 function BlogCard({ post, index }: { post: BlogPost; index: number }) {
   return (

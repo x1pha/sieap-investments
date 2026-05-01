@@ -3,8 +3,7 @@ import { Check, Building2, Users, Rocket, Clock, TrendingUp, Percent } from "luc
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { CardSpotlight } from "./CardSpotlight";
-import { useContext, useState } from "react";
-import { UserTypeContext, UserTypeContextType, UserType } from "@/contexts/UserTypeContext";
+import { useState } from "react";
 import { BusinessPricingSection } from "./BusinessPricingSection";
 import { InvestorPricingSection } from "./InvestorPricingSection";
 import { IncubatorPricingSection } from "./IncubatorPricingSection";
@@ -52,9 +51,7 @@ const PricingTier = ({
 );
 
 export const PricingSection = () => {
-  const context = useContext(UserTypeContext);
-  const [localUserType, setLocalUserType] = useState<UserType>('business');
-  const userType = context?.userType || localUserType;
+  const [userType, setLocalUserType] = useState<'business' | 'investor' | 'incubator'>('business');
 
   const getTitleText = () => {
     switch (userType) {
@@ -103,16 +100,15 @@ export const PricingSection = () => {
           {getDescriptionText()}
         </motion.p>
         
-        {/* User Type Toggle - only show when not in context (standalone page) */}
-        {!context && (
-          <motion.div
+        {/* User Type Toggle */}
+        <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
             className="flex justify-center mb-8"
           >
             <div className="relative">
-              <Tabs value={userType} onValueChange={(value) => setLocalUserType(value as UserType)} className="w-auto">
+              <Tabs value={userType} onValueChange={(value) => setLocalUserType(value as 'business' | 'investor' | 'incubator')} className="w-auto">
                 <TabsList className="grid grid-cols-3 h-14 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-1 shadow-2xl">
                   <TabsTrigger 
                     value="business" 
@@ -142,34 +138,19 @@ export const PricingSection = () => {
               <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/20 via-transparent to-primary/20 rounded-2xl blur opacity-30 animate-pulse pointer-events-none"></div>
             </div>
           </motion.div>
-        )}
       </div>
 
-      {context ? (
-        <motion.div
-          key={userType}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-        >
-          {userType === 'business' && <BusinessPricingSection />}
-          {userType === 'investor' && <InvestorPricingSection />}
-          {userType === 'incubator' && <IncubatorPricingSection />}
-        </motion.div>
-      ) : (
-        <motion.div
-          key={userType}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-        >
-          {userType === 'business' && <BusinessPricingSection />}
-          {userType === 'investor' && <InvestorPricingSection />}
-          {userType === 'incubator' && <IncubatorPricingSection />}
-        </motion.div>
-      )}
+      <motion.div
+        key={userType}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
+      >
+        {userType === 'business' && <BusinessPricingSection />}
+        {userType === 'investor' && <InvestorPricingSection />}
+        {userType === 'incubator' && <IncubatorPricingSection />}
+      </motion.div>
 
       {/* Why Monthly explainer + Standalone Report — shown on homepage for the business view */}
       {userType === 'business' && (

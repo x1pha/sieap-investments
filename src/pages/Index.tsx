@@ -12,6 +12,7 @@ import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { Card } from "@/components/ui/card";
 import { SEOHead } from "@/components/SEOHead";
 import { socialPosts } from "@/config/social-posts";
+import { formatDate } from "@/lib/utils";
 
 const audienceCards = [
   {
@@ -59,10 +60,6 @@ const trustItems = [
     description: "Proprietary AI models power our 100-point scorecard, valuation engine, and due-diligence workflows.",
   },
 ];
-
-function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
-}
 
 const recentPosts = [...socialPosts]
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())

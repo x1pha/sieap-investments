@@ -6,14 +6,11 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { SEOHead } from "@/components/SEOHead";
 import { socialPosts, type SocialPost } from "@/config/social-posts";
+import { formatDate } from "@/lib/utils";
 
 type Filter = "All" | "LinkedIn" | "X / Twitter" | "Trust" | "Evaluation" | "Platform" | "Insights" | "Ecosystem";
 
 const filters: Filter[] = ["All", "LinkedIn", "X / Twitter", "Trust", "Evaluation", "Platform", "Insights", "Ecosystem"];
-
-function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
-}
 
 function matchesFilter(post: SocialPost, filter: Filter): boolean {
   if (filter === "All") return true;
