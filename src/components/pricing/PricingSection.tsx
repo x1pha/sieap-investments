@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Check, Building2, Users, Rocket, Clock, TrendingUp, Percent } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -8,6 +8,7 @@ import { BusinessPricingSection } from "./BusinessPricingSection";
 import { InvestorPricingSection } from "./InvestorPricingSection";
 import { IncubatorPricingSection } from "./IncubatorPricingSection";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { TallyModal } from "@/components/TallyModal";
 
 const PricingTier = ({
   name,
@@ -43,15 +44,13 @@ const PricingTier = ({
           </li>
         ))}
       </ul>
-      <Button className="button-gradient w-full">
-        Get Started
-      </Button>
     </div>
   </CardSpotlight>
 );
 
 export const PricingSection = () => {
   const [userType, setLocalUserType] = useState<'business' | 'investor' | 'incubator'>('business');
+  const [activeModal, setActiveModal] = useState<'business' | 'investor' | 'incubator' | null>(null);
 
   const getTitleText = () => {
     switch (userType) {
@@ -147,9 +146,9 @@ export const PricingSection = () => {
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
       >
-        {userType === 'business' && <BusinessPricingSection />}
-        {userType === 'investor' && <InvestorPricingSection />}
-        {userType === 'incubator' && <IncubatorPricingSection />}
+        {userType === 'business' && <BusinessPricingSection onGetStarted={() => setActiveModal('business')} />}
+        {userType === 'investor' && <InvestorPricingSection onGetStarted={() => setActiveModal('investor')} />}
+        {userType === 'incubator' && <IncubatorPricingSection onGetStarted={() => setActiveModal('incubator')} />}
       </motion.div>
 
       {/* Why Monthly explainer + Standalone Report — shown on homepage for the business view */}
@@ -318,6 +317,33 @@ export const PricingSection = () => {
           </motion.div>
         </>
       )}
+
+      <AnimatePresence>
+        {activeModal === 'business' && (
+          <TallyModal
+            title="Startup Application"
+            tallySrc="https://tally.so/embed/ob0p9N?alignLeft=1&hideTitle=1&dynamicHeight=1"
+            iframeHeight={800}
+            onClose={() => setActiveModal(null)}
+          />
+        )}
+        {activeModal === 'investor' && (
+          <TallyModal
+            title="Investor Interest Form"
+            tallySrc="https://tally.so/embed/gDQpbM?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+            iframeHeight={2920}
+            onClose={() => setActiveModal(null)}
+          />
+        )}
+        {activeModal === 'incubator' && (
+          <TallyModal
+            title="Incubator Application"
+            tallySrc="https://tally.so/embed/ob0p9N?alignLeft=1&hideTitle=1&dynamicHeight=1"
+            iframeHeight={800}
+            onClose={() => setActiveModal(null)}
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 };

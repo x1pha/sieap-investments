@@ -75,24 +75,36 @@ async function handleLinkedInPosts(env: Env): Promise<Response> {
 
   const fields = "id,linkedinUrl,content,postedAt,postImages,engagement";
 
-  // Prefer actor last-run endpoint (always fresh); fall back to fixed dataset snapshot
+  // Prefer task last-run endpoint (always fresh); fall back to fixed dataset snapshot.
+  // APIFY_ACTOR_ID holds a Task ID (alphanumeric) — tasks use /actor-tasks/, not /acts/.
   const apifyUrl = env.APIFY_ACTOR_ID
-    ? `https://api.apify.com/v2/acts/${env.APIFY_ACTOR_ID}/runs/last/dataset/items?token=${env.APIFY_TOKEN}&fields=${fields}&limit=100`
+    ? `https://api.apify.com/v2/actor-tasks/${env.APIFY_ACTOR_ID}/runs/last/dataset/items?token=${env.APIFY_TOKEN}&fields=${fields}&limit=100`
     : `https://api.apify.com/v2/datasets/${env.APIFY_DATASET_ID}/items?token=${env.APIFY_TOKEN}&fields=${fields}&limit=100`;
 
   try {
     const upstream = await fetch(apifyUrl, {
       headers: { "Accept": "application/json" },
       // @ts-ignore — Cloudflare-specific cache directive
-      cf: { cacheTtl: 1800, cacheEverything: true },
+      cf: { cacheTtl: 0, cacheEverything: false },
     });
 
     if (!upstream.ok) {
-      throw new Error(`Apify returned ${upstream.status}`);
+      const body = await upstream.text();
+      return new Response(JSON.stringify({ error: `Apify ${upstream.status}`, detail: body.slice(0, 300), url: apifyUrl.replace(env.APIFY_TOKEN, "***") }), {
+        status: 502,
+        headers: { "Content-Type": "application/json", ...CORS_HEADERS },
+      });
     }
 
-    const items = await upstream.json();
-    return new Response(JSON.stringify({ posts: items }), {
+    const raw = await upstream.json() as unknown;
+    // Apify may return { data: { items: [...] } } or a plain array — normalise both
+    const items: unknown[] = Array.isArray(raw)
+      ? raw
+      : Array.isArray((raw as any)?.data?.items)
+        ? (raw as any).data.items
+        : [];
+
+    return new Response(JSON.stringify({ posts: items, _count: items.length }), {
       headers: {
         "Content-Type": "application/json",
         "Cache-Control": "public, max-age=1800, stale-while-revalidate=3600",
@@ -100,7 +112,7 @@ async function handleLinkedInPosts(env: Env): Promise<Response> {
       },
     });
   } catch (err) {
-    return new Response(JSON.stringify({ error: "Failed to fetch posts" }), {
+    return new Response(JSON.stringify({ error: "Failed to fetch posts", detail: String(err) }), {
       status: 502,
       headers: { "Content-Type": "application/json", ...CORS_HEADERS },
     });

@@ -1,12 +1,16 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Rocket, Users, BarChart3, Calendar, Globe, Star } from "lucide-react";
 import { IncubatorPricingSection } from "@/components/pricing/IncubatorPricingSection";
 import { SEOHead } from "@/components/SEOHead";
+import { TallyModal } from "@/components/TallyModal";
 
 export default function IncubatorPage() {
+  const [showIncubator, setShowIncubator] = useState(false);
+
   const features = [
     {
       title: "Portfolio Management",
@@ -64,9 +68,6 @@ export default function IncubatorPage() {
               Comprehensive platform to manage your startup portfolio, host demo days, and accelerate your incubation process.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button className="button-gradient" asChild>
-            <a href="/startup-tracking">View Startup Dashboard</a>
-          </Button>
               <Button variant="outline" size="lg">
                 Schedule Demo
               </Button>
@@ -200,7 +201,18 @@ export default function IncubatorPage() {
       </section>
 
       {/* Pricing Section */}
-      <IncubatorPricingSection />
+      <IncubatorPricingSection onGetStarted={() => setShowIncubator(true)} />
+
+      <AnimatePresence>
+        {showIncubator && (
+          <TallyModal
+            title="Incubator Application"
+            tallySrc="https://tally.so/embed/ob0p9N?alignLeft=1&hideTitle=1&dynamicHeight=1"
+            iframeHeight={800}
+            onClose={() => setShowIncubator(false)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

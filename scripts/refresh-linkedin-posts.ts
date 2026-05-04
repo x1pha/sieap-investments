@@ -44,11 +44,12 @@ let items: Array<{
 }>;
 
 if (ACTOR_ID) {
-  // Run the actor synchronously and get items in one call (waits up to 300s)
+  // Run the task synchronously and get items in one call (waits up to 300s).
+  // APIFY_ACTOR_ID holds a Task ID — tasks use /actor-tasks/, not /acts/.
   const runUrl =
-    `https://api.apify.com/v2/acts/${ACTOR_ID}/run-sync-get-dataset-items` +
+    `https://api.apify.com/v2/actor-tasks/${ACTOR_ID}/run-sync-get-dataset-items` +
     `?token=${TOKEN}&fields=${fields}&limit=100&waitSecs=300`;
-  console.log(`Triggering Apify actor ${ACTOR_ID} — waiting for results (up to 5 min)...`);
+  console.log(`Triggering Apify task ${ACTOR_ID} — waiting for results (up to 5 min)...`);
   const res = await fetch(runUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

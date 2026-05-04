@@ -77,30 +77,31 @@ const InvestorTier = ({ name, price, description, features, limitations, isPopul
           </div>
         )}
         
-        <Button 
-          className={`w-full mt-8 ${isPopular ? 'button-gradient' : 'bg-secondary hover:bg-secondary/80'}`}
-          size="lg"
-        >
-          Get Started
-        </Button>
       </CardContent>
     </Card>
   </CardSpotlight>
 );
 
-export const InvestorPricingSection = () => {
+export const InvestorPricingSection = ({ onGetStarted }: { onGetStarted?: () => void }) => {
   return (
-    <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-      {investorTiers.map((tier, index) => (
-        <motion.div
-          key={tier.name}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: index * 0.1 }}
-        >
-          <InvestorTier {...tier} />
-        </motion.div>
-      ))}
+    <div className="max-w-4xl mx-auto">
+      <div className="grid md:grid-cols-2 gap-8">
+        {investorTiers.map((tier, index) => (
+          <motion.div
+            key={tier.name}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+          >
+            <InvestorTier {...tier} />
+          </motion.div>
+        ))}
+      </div>
+      <div className="mt-10 flex justify-center">
+        <Button size="lg" className="button-gradient" onClick={onGetStarted}>
+          Get Started
+        </Button>
+      </div>
     </div>
   );
 };

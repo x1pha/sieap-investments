@@ -77,35 +77,36 @@ const BusinessTier = ({ name, price, description, features, isPopular }: { name:
             </li>
           ))}
         </ul>
-        <Button 
-          className={`w-full mt-8 ${isPopular ? 'button-gradient' : 'bg-secondary hover:bg-secondary/80'}`}
-          size="lg"
-        >
-          Get Started
-        </Button>
       </CardContent>
     </Card>
   </CardSpotlight>
 );
 
-export const BusinessPricingSection = () => {
+export const BusinessPricingSection = ({ onGetStarted }: { onGetStarted?: () => void }) => {
   return (
-    <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-      {businessTiers.map((tier, index) => (
-        <motion.div
-          key={tier.name}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: index * 0.1 }}
-        >
-          <BusinessTier {...tier} />
-          {"footnote" in tier && tier.footnote && (
-            <p className="text-xs text-gray-500 italic mt-3 text-left">
-              {tier.footnote}
-            </p>
-          )}
-        </motion.div>
-      ))}
+    <div className="max-w-6xl mx-auto">
+      <div className="grid md:grid-cols-3 gap-8">
+        {businessTiers.map((tier, index) => (
+          <motion.div
+            key={tier.name}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+          >
+            <BusinessTier {...tier} />
+            {"footnote" in tier && tier.footnote && (
+              <p className="text-xs text-gray-500 italic mt-3 text-left">
+                {tier.footnote}
+              </p>
+            )}
+          </motion.div>
+        ))}
+      </div>
+      <div className="mt-10 flex justify-center">
+        <Button size="lg" className="button-gradient" onClick={onGetStarted}>
+          Get Started
+        </Button>
+      </div>
     </div>
   );
 };

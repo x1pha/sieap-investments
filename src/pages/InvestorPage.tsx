@@ -1,12 +1,15 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { TrendingUp, BarChart3, Shield, Users, Eye, Zap } from "lucide-react";
 import { InvestorPricingSection } from "@/components/pricing/InvestorPricingSection";
 import { SEOHead } from "@/components/SEOHead";
+import { TallyModal } from "@/components/TallyModal";
 
 export default function InvestorPage() {
+  const [showInvestor, setShowInvestor] = useState(false);
   const features = [
     {
       title: "Deal Flow Access",
@@ -64,11 +67,8 @@ export default function InvestorPage() {
               Connect with promising startups, access exclusive deal flow, and build a diversified portfolio with professional support.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="button-gradient">
+              <Button size="lg" className="button-gradient" onClick={() => setShowInvestor(true)}>
                 Start Investing
-              </Button>
-              <Button variant="outline" size="lg">
-                View Deal Flow
               </Button>
             </div>
           </motion.div>
@@ -159,7 +159,18 @@ export default function InvestorPage() {
       </section>
 
       {/* Pricing Section */}
-      <InvestorPricingSection />
+      <InvestorPricingSection onGetStarted={() => setShowInvestor(true)} />
+
+      <AnimatePresence>
+        {showInvestor && (
+          <TallyModal
+            title="Investor Interest Form"
+            tallySrc="https://tally.so/embed/gDQpbM?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+            iframeHeight={2920}
+            onClose={() => setShowInvestor(false)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
