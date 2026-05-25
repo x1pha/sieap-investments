@@ -3,9 +3,11 @@ import { toast } from "sonner";
 import { LINKEDIN_POSTS_SEED, LinkedInPost, SEED_LATEST_ID } from "@/config/linkedin-posts";
 
 const CACHE_KEY = "sieap_li_feed";
+const CACHE_VERSION = 2; // bump to invalidate old caches with wrong structure
 const POLL_INTERVAL_MS = 30 * 60 * 1000; // 30 minutes
 
 interface CacheEntry {
+  v: number;
   posts: LinkedInPost[];
   fetchedAt: number;
   latestId: string;
@@ -13,6 +15,7 @@ interface CacheEntry {
 
 interface LinkedInFeedContextValue {
   posts: LinkedInPost[];
+  loading: boolean;
   lastFetchedAt: number | null;
   newPostCount: number;
   clearNewPostBadge: () => void;
@@ -20,15 +23,32 @@ interface LinkedInFeedContextValue {
 
 const LinkedInFeedContext = createContext<LinkedInFeedContextValue>({
   posts: LINKEDIN_POSTS_SEED,
+  loading: false,
   lastFetchedAt: null,
   newPostCount: 0,
   clearNewPostBadge: () => {},
 });
 
+/** A valid post must have id, content, and postedAt.date */
+function isValidPost(p: unknown): p is LinkedInPost {
+  if (!p || typeof p !== "object") return false;
+  const post = p as any;
+  return (
+    typeof post.id === "string" && post.id.length > 0 &&
+    typeof post.content === "string" && post.content.length > 0 &&
+    typeof post.postedAt?.date === "string"
+  );
+}
+
 function loadCache(): CacheEntry | null {
   try {
     const raw = localStorage.getItem(CACHE_KEY);
-    return raw ? JSON.parse(raw) : null;
+    if (!raw) return null;
+    const entry: CacheEntry = JSON.parse(raw);
+    // Reject old cache versions or entries with no valid posts
+    if (entry.v !== CACHE_VERSION) return null;
+    if (!Array.isArray(entry.posts) || !entry.posts.some(isValidPost)) return null;
+    return entry;
   } catch {
     return null;
   }
@@ -40,9 +60,13 @@ function saveCache(entry: CacheEntry) {
   } catch {}
 }
 
+function clearCache() {
+  try { localStorage.removeItem(CACHE_KEY); } catch {}
+}
+
 // In production the Cloudflare Worker serves /api/linkedin-posts.
 // In local dev set VITE_LI_FEED_URL to a full URL to enable polling;
-// without it dev polling is intentionally a no-op (uses seed data).
+// without it dev uses seed data (LinkedIn CDN blocks direct hotlinks anyway).
 const isLocalhost =
   typeof window !== "undefined" &&
   (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1");
@@ -57,7 +81,9 @@ async function fetchLatestPosts(): Promise<LinkedInPost[] | null> {
     const res = await fetch(FEED_URL, { signal: AbortSignal.timeout(15_000) });
     if (!res.ok) return null;
     const data = await res.json();
-    return Array.isArray(data?.posts) && data.posts.length > 0 ? data.posts : null;
+    const posts: unknown[] = Array.isArray(data?.posts) ? data.posts : [];
+    const valid = posts.filter(isValidPost);
+    return valid.length > 0 ? valid : null;
   } catch {
     return null;
   }
@@ -66,27 +92,28 @@ async function fetchLatestPosts(): Promise<LinkedInPost[] | null> {
 export function LinkedInFeedProvider({ children }: { children: ReactNode }) {
   const cache = loadCache();
   const [posts, setPosts] = useState<LinkedInPost[]>(cache?.posts ?? LINKEDIN_POSTS_SEED);
+  const [loading, setLoading] = useState(!cache && !!FEED_URL);
   const [lastFetchedAt, setLastFetchedAt] = useState<number | null>(cache?.fetchedAt ?? null);
   const [newPostCount, setNewPostCount] = useState(0);
-  // Track the latest known post ID via ref so it's always current inside the poll closure
   const knownLatestId = useRef<string>(cache?.latestId ?? SEED_LATEST_ID);
 
   useEffect(() => {
     const poll = async () => {
       const fresh = await fetchLatestPosts();
-      // API unavailable or empty — keep current posts, don't change anything
-      if (!fresh) return;
 
-      // Always replace posts with the full fresh list from the API.
-      // This fixes the stale-closure bug (no merging with captured state)
-      // and ensures the display always reflects the latest Apify dataset.
+      // API unavailable or returned nothing valid — keep current posts
+      if (!fresh) {
+        setLoading(false);
+        return;
+      }
+
       setPosts(fresh);
-      saveCache({ posts: fresh, fetchedAt: Date.now(), latestId: fresh[0].id });
+      setLoading(false);
+      saveCache({ v: CACHE_VERSION, posts: fresh, fetchedAt: Date.now(), latestId: fresh[0].id });
       setLastFetchedAt(Date.now());
 
-      // Detect how many posts are newer than what we last knew about
       const knownIdx = fresh.findIndex((p) => p.id === knownLatestId.current);
-      const newCount = knownIdx === -1 ? 0 : knownIdx; // knownIdx === 0 means no new posts
+      const newCount = knownIdx === -1 ? 0 : knownIdx;
 
       if (newCount > 0) {
         knownLatestId.current = fresh[0].id;
@@ -108,6 +135,7 @@ export function LinkedInFeedProvider({ children }: { children: ReactNode }) {
     <LinkedInFeedContext.Provider
       value={{
         posts,
+        loading,
         lastFetchedAt,
         newPostCount,
         clearNewPostBadge: () => setNewPostCount(0),

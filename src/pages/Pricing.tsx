@@ -14,6 +14,7 @@ import {
 import { BusinessPricingSection } from "@/components/pricing/BusinessPricingSection";
 import { IncubatorPricingSection } from "@/components/pricing/IncubatorPricingSection";
 import { InvestorPricingSection } from "@/components/pricing/InvestorPricingSection";
+import { PricingHeroSection } from "@/components/pricing/PricingHeroSection";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -95,7 +96,7 @@ const Pricing = () => {
       <Navigation />
 
       {/* Hero */}
-      <section className="container px-4 pt-32 pb-12 md:pt-40 md:pb-16">
+      <section className="container px-4 pt-32 pb-4 md:pt-40 md:pb-6">
         <motion.div
           initial="hidden"
           animate="visible"
@@ -112,39 +113,11 @@ const Pricing = () => {
             report. You choose the engagement that fits.
           </p>
         </motion.div>
-
-        {/* Anchor nav */}
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-          custom={1}
-          className="flex flex-wrap justify-center gap-3 mt-10"
-        >
-          <a
-            href="#startup-plans"
-            className="bg-white/10 hover:bg-white/20 text-gray-300 text-sm px-4 py-2 rounded-full transition-all"
-          >
-            Startup Plans
-          </a>
-          <a
-            href="#standalone-report"
-            className="bg-white/10 hover:bg-white/20 text-gray-300 text-sm px-4 py-2 rounded-full transition-all"
-          >
-            Standalone Report
-          </a>
-          <a
-            href="#other-pricing"
-            className="bg-white/10 hover:bg-white/20 text-gray-300 text-sm px-4 py-2 rounded-full transition-all"
-          >
-            Incubator & Investor
-          </a>
-        </motion.div>
       </section>
 
-      {/* Startup tier cards */}
+      {/* Interactive pricing cards — tab toggle + stage slider */}
       <section id="startup-plans" className="scroll-mt-24">
-        <BusinessPricingSection />
+        <PricingHeroSection />
       </section>
 
       {/* Why Monthly explainer */}

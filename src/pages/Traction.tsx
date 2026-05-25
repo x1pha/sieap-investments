@@ -12,7 +12,7 @@ import { useLinkedInFeed } from "@/contexts/LinkedInFeedContext";
 import { blogPosts } from "@/config/blog-posts";
 import { socialPosts } from "@/config/social-posts";
 import type { LinkedInPost } from "@/config/linkedin-posts";
-import { proxyImageUrl, formatDate } from "@/lib/utils";
+import { proxyImageUrl, formatDate, isLocalDev } from "@/lib/utils";
 import { LinkedInLightbox } from "@/components/LinkedInLightbox";
 
 const TABS = [
@@ -25,19 +25,97 @@ type Tab = typeof TABS[number]["key"];
 
 // ─── Posts tab ───────────────────────────────────────────────────────────────
 
+function PostCard({
+  post,
+  onClick,
+}: {
+  post: LinkedInPost;
+  onClick: () => void;
+}) {
+  const [imgFailed, setImgFailed] = useState(false);
+  const img = post.postImages?.[0];
+  // On localhost the proxy is bypassed and LinkedIn CDN blocks direct browser requests,
+  // so skip the image element entirely in dev to avoid a broken-image flash.
+  const showImage = !!img && !imgFailed && !isLocalDev;
+
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="group cursor-pointer rounded-xl overflow-hidden glass border border-white/5 hover:border-primary/20 transition-colors duration-300"
+      onClick={onClick}
+    >
+      {showImage ? (
+        <div className="relative overflow-hidden">
+          <img
+            src={proxyImageUrl(img.url)}
+            alt={post.content.slice(0, 60)}
+            loading="lazy"
+            className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            style={{ aspectRatio: `${img.width}/${img.height}` }}
+            onError={() => setImgFailed(true)}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+            <p className="text-sm text-white line-clamp-3">{post.content}</p>
+          </div>
+        </div>
+      ) : (
+        <div className="p-6 min-h-[140px] flex flex-col justify-between gap-3 bg-gradient-to-br from-primary/5 via-transparent to-primary/8">
+          <p className="text-sm text-foreground/90 leading-relaxed line-clamp-6">
+            {post.content}
+          </p>
+        </div>
+      )}
+      <div className="px-4 py-3 flex items-center justify-between">
+        <span className="text-xs text-muted-foreground">{formatDate(post.postedAt.date)}</span>
+        <Linkedin className="w-3.5 h-3.5 text-[#0077b5] opacity-60" />
+      </div>
+    </motion.div>
+  );
+}
+
 function PostsTab() {
-  const { posts, lastFetchedAt, newPostCount, clearNewPostBadge } = useLinkedInFeed();
+  const { posts, loading, lastFetchedAt, newPostCount, clearNewPostBadge } = useLinkedInFeed();
   const [selected, setSelected] = useState<LinkedInPost | null>(null);
 
-  const postsWithImages = posts.filter((p) => p.postImages && p.postImages.length > 0);
-  const col0 = postsWithImages.filter((_, i) => i % 3 === 0);
-  const col1 = postsWithImages.filter((_, i) => i % 3 === 1);
-  const col2 = postsWithImages.filter((_, i) => i % 3 === 2);
+  const col0 = posts.filter((_, i) => i % 3 === 0);
+  const col1 = posts.filter((_, i) => i % 3 === 1);
+  const col2 = posts.filter((_, i) => i % 3 === 2);
 
   const open = (post: LinkedInPost) => {
     setSelected(post);
     if (newPostCount > 0) clearNewPostBadge();
   };
+
+  if (loading) {
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-start">
+        {[0, 1, 2].map((ci) => (
+          <div key={ci} className="flex flex-col gap-4">
+            {[180, 260, 200].map((h, i) => (
+              <div key={i} className="glass rounded-xl animate-pulse" style={{ height: h }} />
+            ))}
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  if (posts.length === 0) {
+    return (
+      <div className="text-center py-24">
+        <Linkedin className="w-12 h-12 text-[#0077b5] mx-auto mb-4 opacity-40" />
+        <p className="text-muted-foreground mb-6">No posts available right now.</p>
+        <Button variant="outline" asChild>
+          <a href="https://www.linkedin.com/company/sieap-startup/" target="_blank" rel="noopener noreferrer" className="gap-2">
+            <Linkedin className="w-4 h-4 text-[#0077b5]" />
+            View SIEAP on LinkedIn
+          </a>
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -68,37 +146,12 @@ function PostsTab() {
         </a>
       </div>
 
-      {/* masonry grid */}
+      {/* masonry grid — ALL posts, images optional */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-start">
         {[col0, col1, col2].map((col, ci) => (
           <div key={ci} className="flex flex-col gap-4">
             {col.map((post) => (
-              <motion.div
-                key={post.id}
-                layout
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="group cursor-pointer rounded-xl overflow-hidden glass"
-                onClick={() => open(post)}
-              >
-                <div className="relative overflow-hidden">
-                  <img
-                    src={proxyImageUrl(post.postImages![0].url)}
-                    alt={post.content.slice(0, 60)}
-                    loading="lazy"
-                    className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    style={{
-                      aspectRatio: `${post.postImages![0].width}/${post.postImages![0].height}`,
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                    <p className="text-sm text-white line-clamp-3">{post.content}</p>
-                  </div>
-                </div>
-                <div className="px-4 py-3 text-xs text-muted-foreground">
-                  {formatDate(post.postedAt.date)}
-                </div>
-              </motion.div>
+              <PostCard key={post.id} post={post} onClick={() => open(post)} />
             ))}
           </div>
         ))}
@@ -107,9 +160,7 @@ function PostsTab() {
       <div className="text-center mt-12">
         <Button
           variant="outline"
-          onClick={() =>
-            window.open("https://www.linkedin.com/company/sieap-startup/", "_blank")
-          }
+          onClick={() => window.open("https://www.linkedin.com/company/sieap-startup/", "_blank")}
           className="gap-2"
         >
           <Linkedin className="w-4 h-4 text-[#0077b5]" />

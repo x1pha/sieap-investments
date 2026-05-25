@@ -71,14 +71,17 @@ const Navigation = ({ userType = "business", onTypeChange }: NavigationProps) =>
   return <header className={`fixed top-3.5 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 rounded-full ${isScrolled ? "h-14 bg-[#1B1B1B]/40 backdrop-blur-xl border border-white/10 scale-95 w-[94%] max-w-4xl" : "h-14 bg-[#1B1B1B] w-[98%] max-w-5xl"}`}>
       <div className="mx-auto h-full px-6">
         <nav className="flex items-center justify-between h-full">
-          <div className="flex items-center gap-2">
-            <a href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-              <img 
-                src="/uploads/0dbe1b75-2c74-4ff8-ba55-4be4d74abe72.png" 
-                alt="SIEAP Logo" 
-                className="w-5 h-5" 
+          <div className="flex items-center">
+            <a href="/" className="flex items-center gap-2.5 hover:opacity-85 transition-opacity">
+              <img
+                src="/uploads/sieap-logo.png"
+                alt="SIEAP Advisors"
+                className="h-10 w-auto mix-blend-screen"
               />
-              <span className="font-bold text-base">SIEAP Ecosystem</span>
+              <div className="flex flex-col leading-none">
+                <span className="text-[13px] font-bold tracking-[0.12em] uppercase" style={{ color: "#C9A84C" }}>SIEAP</span>
+                <span className="text-[9px] tracking-[0.20em] uppercase text-muted-foreground">Advisors</span>
+              </div>
             </a>
           </div>
 

@@ -60,7 +60,7 @@ export default function StartupTrackingPage() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "Active":
-        return "bg-green-500/20 text-green-400 border-green-500/30";
+        return "bg-primary/20 text-primary border-primary/30";
       case "Inactive":
         return "bg-red-500/20 text-red-400 border-red-500/30";
       default:
@@ -145,7 +145,7 @@ export default function StartupTrackingPage() {
             <Card className="glass">
               <CardHeader className="pb-4">
                 <div className="flex items-center justify-between">
-                  <TrendingUp className="w-6 h-6 text-green-400" />
+                  <TrendingUp className="w-6 h-6 text-primary" />
                   <span className="text-2xl font-bold">89</span>
                 </div>
               </CardHeader>
